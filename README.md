@@ -1,1 +1,1 @@
-# SnapGarden
+# SnapGarden 🥬
