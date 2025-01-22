@@ -32,3 +32,23 @@ SnapGarden is an AI-powered platform that helps users identify plants, monitor t
    ```bash
    docker load -i obsidian-db.tar
    docker run -d obsidian-db
+3. LLM
+   3.1 Clone this repository and navigate to the source folder
+
+   ```bash
+   git clone https://github.com/OpenBMB/MiniCPM-V.git
+   cd MiniCPM-V
+   ```
+
+   3.2 Create conda environment
+
+   ```Shell
+   conda create -n MiniCPM-V python=3.10 -y
+   conda activate MiniCPM-V
+   ```
+
+   3.3 Install dependencies
+
+   ```shell
+   pip install -r requirements.txt
+   ```
