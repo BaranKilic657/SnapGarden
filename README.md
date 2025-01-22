@@ -27,3 +27,8 @@ SnapGarden is an AI-powered platform that helps users identify plants, monitor t
 1. Clone the repository:  
    ```bash
    git clone https://github.com/your-username/snapgarden.git
+
+2. Database Image
+   ```bash
+   docker load -i obsidian-db.tar
+   docker run -d obsidian-db
