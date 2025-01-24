@@ -55,6 +55,12 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important; }
 
+.gradient-green {
+    background: linear-gradient(90deg, #28a745, #85e085); /* Green gradient */
+    color: white;
+}
+
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
