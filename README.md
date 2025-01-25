@@ -29,7 +29,24 @@ SnapGarden is an AI-powered platform that simplifies plant care for both beginne
 Before you start, make sure you have the following tools installed:  
 - [Git](https://git-scm.com/)
 - [Docker](https://www.docker.com/get-started)
-- [Conda](https://docs.conda.io/projects/conda/en/latest/user_guide/install/index.html)  
+- [Miniconda](https://docs.anaconda.com/miniconda/install/) 
+- For GPU:
+   - NVIDIA GPU with Compute Capability ≥ 7.0 (T4/V100/A100 recommended)
+   - NVIDIA Drivers ≥ 525.60.13
+   - Linux recommended (Windows WSL2 supported)
+
+### Environment Options
+
+| Feature                | GPU Environment                 | CPU Environment                 |
+|------------------------|---------------------------------|---------------------------------|
+| Target Hardware        | NVIDIA GPUs (T4/V100/A100)      | CPUs                            |
+| PyTorch                | CUDA 12.1 builds                | CPU-only builds                 |
+| TensorFlow             | GPU-accelerated                 | CPU-only                        |
+| JAX                    | CUDA/CUDNN support              | CPU-only                        |
+| RAM                    | ~8GB                            | ~8GB                            |
+| Disk Space             | ~15GB                           | ~15GB                           |
+
+
 
 ### 1. Clone the Repository  
 Clone the SnapGarden repository to your local machine:  
@@ -38,39 +55,19 @@ git clone https://github.com/ge95bid/snapgarden.git
 cd snapgarden
 ```
 
-### 2. Setup the Database  
-To run SnapGarden, you will need the database image. Load and start the database container with the following commands:
+### 2. Setup
+Create a conda environment depending on required configuration and limits.
 
+**For GPU**
 ```bash
-docker load -i obsidian-db.tar
-docker run -d --name obsidian-db obsidian-db
+conda env create -f environment_gpu.yml
+conda activate SnapGarden_GPU
 ```
 
-This will set up the database required for SnapGarden to operate.
-
-### 3. Setup the AI Model (LLM)  
-
-#### 3.1 Clone the LLM Repository  
-The platform uses the MiniCPM-V model for AI-powered features. Clone the repository and navigate to the source folder:
-
+**For CPU**
 ```bash
-git clone https://github.com/OpenBMB/MiniCPM-V.git
-cd MiniCPM-V
-```
-
-#### 3.2 Create and Activate the Conda Environment  
-Create a new Conda environment for the project:
-
-```bash
-conda create -n MiniCPM-V python=3.10 -y
-conda activate MiniCPM-V
-```
-
-#### 3.3 Install Dependencies  
-Install all required Python dependencies:
-
-```bash
-pip install -r requirements.txt
+conda env create -f environment-cpu.yml
+conda activate SnapGarden_CPU
 ```
 
 ---
