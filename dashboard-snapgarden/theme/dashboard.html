@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    
-    <!-- theme meta -->
-    <meta name="theme-name" content="quixlab" />
   
     <title>SnapGarden - Dashboard</title>
     <!-- Favicon icon -->
@@ -49,7 +46,7 @@
         ***********************************-->
         <div class="nav-header" style="background-color: whitesmoke;">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="dashboard.html">
                     <b class="logo-abbr"><img src="images/logo2.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -153,8 +150,7 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-
+        <div class="content-body" style="min-height: 100vh; position: relative; background-image: url('images/background3.png'); background-size: cover; background-position: center;">
             <div class="container-fluid mt-3">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
@@ -205,163 +201,156 @@
             </div>
             
                 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="todo-list">
-                                    <div class="tdl-holder">
-                                        <div class="tdl-content2 tdl-content--no-label">
-                                            <ul>
-                                                <li>
-                                                    <label><input type="checkbox"><i></i><span>Water - Monstera #1</span><a href='#' class="ti-close"></a>
-                                                    </label>
-                                                    
-                                                
-                                                </li>
-                                                <li>
-                                                    <label><input type="checkbox" checked><i></i><span>Water - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
-                                                    </label>
-                                                    
-                                                </li>
-                                                <li>
-                                                    <label><input type="checkbox"><i></i><span>Health Check - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
-                                                    </label>
-                                                    
-                                                </li>
-                                                <li>
-                                                    <label><input type="checkbox" checked><i></i><span>Water - Snake Plant - Office Desk</span><a href='#' class="ti-close"></a>
-                                                    </label>
-                                                    
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <input type="text" class="tdl-new2 form-control" placeholder="Write new item and hit 'Enter'..." required>
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="todo-list">
+                                <div class="tdl-holder">
+                                    <div class="tdl-content2 tdl-content--no-label">
+                                        <ul>
+                                            <li>
+                                                <label><input type="checkbox"><i></i><span>Water - Monstera #1</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label><input type="checkbox" checked><i></i><span>Water - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label><input type="checkbox"><i></i><span>Health Check - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label><input type="checkbox" checked><i></i><span>Water - Snake Plant - Office Desk</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                        </ul>
                                     </div>
+                                    <input type="text" class="tdl-new2 form-control" placeholder="Write new item and hit 'Enter'..." required>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="active-member">
-                                    <div class="table-responsive">
-                                        <table class="table table-xs mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name/Description</th>
-                                                    <th>Plant Identified</th>
-                                                    <th>Room</th>
-                                                    <th>Health Status</th>
-                                                    <th>Last Watered</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Monstera #1</td>
-                                                    <td>Monstera</td>
-                                                    <td><span>Living Room</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 80%"></div>
-                                                            </div>
+            </div>
+            
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="active-member">
+                                <div class="table-responsive">
+                                    <table class="table table-xs mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name/Description</th>
+                                                <th>Plant Identified</th>
+                                                <th>Room</th>
+                                                <th>Health Status</th>
+                                                <th>Last Watered</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Monstera #1</td>
+                                                <td>Monstera</td>
+                                                <td><span>Living Room</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-success" style="width: 80%"></div>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span>2 days ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fiddle Leaf Fig - Corner Plant</td>
-                                                    <td>Fiddle Leaf Fig</td>
-                                                    <td><span>Bedroom</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-warning" style="width: 60%"></div>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>2 days ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fiddle Leaf Fig - Corner Plant</td>
+                                                <td>Fiddle Leaf Fig</td>
+                                                <td><span>Bedroom</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-warning" style="width: 60%"></div>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span>5 days ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Snake Plant - Office Desk</td>
-                                                    <td>Snake Plant</td>
-                                                    <td><span>Office</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-danger" style="width: 40%"></div>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>5 days ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Snake Plant - Office Desk</td>
+                                                <td>Snake Plant</td>
+                                                <td><span>Office</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-danger" style="width: 40%"></div>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span>1 week ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peace Lily - Kitchen Counter</td>
-                                                    <td>Peace Lily</td>
-                                                    <td><span>Kitchen</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>1 week ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Peace Lily - Kitchen Counter</td>
+                                                <td>Peace Lily</td>
+                                                <td><span>Kitchen</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-success" style="width: 90%"></div>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span>1 day ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Succulent - Bathroom Shelf</td>
-                                                    <td>Succulent</td>
-                                                    <td><span>Bathroom</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 75%"></div>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>1 day ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Succulent - Bathroom Shelf</td>
+                                                <td>Succulent</td>
+                                                <td><span>Bathroom</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-success" style="width: 75%"></div>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span>3 days ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Spider Plant - Hanging Basket</td>
-                                                    <td>Spider Plant</td>
-                                                    <td><span>Living Room</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>3 days ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Spider Plant - Hanging Basket</td>
+                                                <td>Spider Plant</td>
+                                                <td><span>Living Room</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-warning" style="width: 50%"></div>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span>4 days ago</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>4 days ago</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </div>                        
-                    </div>
+                        </div>
+                    </div>                        
                 </div>
             </div>
-            <!-- #/ container -->
-        </div>
+            
         <!--**********************************
             Content body end
         ***********************************-->
