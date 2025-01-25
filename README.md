@@ -84,9 +84,9 @@ Once you've completed the installation, you can start using SnapGarden!
 
 ## Technologies Used  
 
-- **AI/ML Models**: MiniCPM-V for plant identification and health analysis.  
-- **Backend**: Docker for containerization and PostgreSQL as the database.  
-- **Frontend**: Built with modern JavaScript frameworks (React/Next.js).  
+- **AI/ML Models**: ******* for plant identification and health analysis.  
+- **Backend**: 
+- **Frontend**: Built with JavaScript frameworks.  
 - **Cloud**: Deployment on cloud platforms like AWS or Azure (depending on user choice).
 
 ---
