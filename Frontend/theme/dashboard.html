@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <title>SnapGarden - Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Pignose Calender -->
+    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <!-- Custom Stylesheet -->
+    <link href="css/style2.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header" style="background-color: whitesmoke;">
+            <div class="brand-logo">
+                <a href="dashboard.html">
+                    <b class="logo-abbr"><img src="images/logo2.png" alt=""> </b>
+                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="images/logo-text.png" alt="" style="width: 200px; height: auto; position: relative; left: -10px;">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header" style="background-color: beige;">
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="images/user/1.png" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li><a href="sign-in.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li>
+                        <a href="dashboard.html" aria-expanded="false">
+                            <i class="ti-dashboard menu-icon"></i>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-label">Identification</li>
+                    <li>
+                        <a href="plantid.html" aria-expanded="false">
+                            <i class="ti-palette  menu-icon"></i>
+                            <span class="nav-text">Plant Identification</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="healthas.html" aria-expanded="false">
+                            <i class="ti-heart menu-icon"></i>
+                            <span class="nav-text">Health Assessment</span>
+                        </a>
+                    </li>
+                    <li class="nav-label">Apps</li>
+                    <li>
+                        <a href="./app-calender.html" aria-expanded="false">
+                            <i class="ti-calendar menu-icon"></i>
+                            <span class="nav-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./chart-chartist.html" aria-expanded="false">
+                            <i class="ti-bar-chart menu-icon"></i>
+                            <span class="nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-label">Table</li>
+                    <li>
+                        <a href="table-datatable.html" aria-expanded="false">
+                            <i class="ti-layout-menu-v menu-icon"></i>
+                            <span class="nav-text">Datatable</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body" style="min-height: 100vh; position: relative; background-image: url('images/background3.png'); background-size: cover; background-position: center;">
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="background: #a3d9a5;">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Plants Identified</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">15</h2>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-leaf"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="background: #8dcf8f;">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Health Assessments</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">9</h2>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-stethoscope"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="background: #76c893;">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Plants Watered</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">1,245</h2>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-user-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="background: #5eb77f;">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Tasks Fulfilled</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">88%</h2>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-smile"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="todo-list">
+                                <div class="tdl-holder">
+                                    <div class="tdl-content2 tdl-content--no-label">
+                                        <ul>
+                                            <li>
+                                                <label><input type="checkbox"><i></i><span>Water - Monstera #1</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label><input type="checkbox" checked><i></i><span>Water - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label><input type="checkbox"><i></i><span>Health Check - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label><input type="checkbox" checked><i></i><span>Water - Snake Plant - Office Desk</span><a href='#' class="ti-close"></a>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <input type="text" class="tdl-new2 form-control" placeholder="Write new item and hit 'Enter'..." required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="active-member">
+                                <div class="table-responsive">
+                                    <table class="table table-xs mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name/Description</th>
+                                                <th>Plant Identified</th>
+                                                <th>Room</th>
+                                                <th>Health Status</th>
+                                                <th>Last Watered</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Monstera #1</td>
+                                                <td>Monstera</td>
+                                                <td><span>Living Room</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-success" style="width: 80%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>2 days ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fiddle Leaf Fig - Corner Plant</td>
+                                                <td>Fiddle Leaf Fig</td>
+                                                <td><span>Bedroom</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-warning" style="width: 60%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>5 days ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Snake Plant - Office Desk</td>
+                                                <td>Snake Plant</td>
+                                                <td><span>Office</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>1 week ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Peace Lily - Kitchen Counter</td>
+                                                <td>Peace Lily</td>
+                                                <td><span>Kitchen</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-success" style="width: 90%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>1 day ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Succulent - Bathroom Shelf</td>
+                                                <td>Succulent</td>
+                                                <td><span>Bathroom</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-success" style="width: 75%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>3 days ago</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Spider Plant - Hanging Basket</td>
+                                                <td>Spider Plant</td>
+                                                <td><span>Living Room</span></td>
+                                                <td>
+                                                    <div>
+                                                        <div class="progress" style="height: 6px">
+                                                            <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>4 days ago</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                        
+                </div>
+            </div>
+            
+        <!--**********************************
+            Content body end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+
+    <!-- Chartjs -->
+    <script src="./plugins/chart.js/Chart.bundle.min.js"></script>
+    <!-- Circle progress -->
+    <script src="./plugins/circle-progress/circle-progress.min.js"></script>
+    <!-- Datamap -->
+    <script src="./plugins/d3v3/index.js"></script>
+    <script src="./plugins/topojson/topojson.min.js"></script>
+    <script src="./plugins/datamaps/datamaps.world.min.js"></script>
+    <!-- Morrisjs -->
+    <script src="./plugins/raphael/raphael.min.js"></script>
+    <script src="./plugins/morris/morris.min.js"></script>
+    <!-- Pignose Calender -->
+    <script src="./plugins/moment/moment.min.js"></script>
+    <script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+    <!-- ChartistJS -->
+    <script src="./plugins/chartist/js/chartist.min.js"></script>
+    <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+
+
+
+    <script src="./js/dashboard/dashboard-1.js"></script>
+
+</body>
+
+</html>

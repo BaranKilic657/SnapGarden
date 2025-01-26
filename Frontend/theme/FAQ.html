@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>SnapGarden | Your Garden Assistant</title>
+
+  <!-- Mobile Specific Metas -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="SnapGarden - AI-powered plant care assistant">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+  
+  <!-- PLUGINS CSS STYLE -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <link rel="stylesheet" href="plugins/slick/slick-theme.css">
+  <link rel="stylesheet" href="plugins/fancybox/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="plugins/aos/aos.css">
+
+  <!-- CUSTOM CSS -->
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+
+	<nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+		<div class="container">
+		  <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="ti-menu"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="index.html">Home</a>
+			  </li>
+			  <li class="nav-item dropdown @@pages">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Pages
+				  <span><i class="ti-angle-down"></i></span>
+				</a>
+				<!-- Dropdown list -->
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item @@about" href="about.html">About</a></li>
+					<li><a class="dropdown-item @@faq" href="FAQ.html">FAQ</a></li>
+				</ul>
+			  </li>
+			  <li class="nav-item @@contact"><a class="nav-link" href="contact.html">Contact</a></li>
+			  <li class="nav-item @@signin">
+				<a class="nav-link sign-in-btn" href="sign-in.html">Sign In</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>	  
+
+<!--================================
+=            Page Title            =
+=================================-->
+
+<section class="section page-title">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 m-auto">
+				<!-- Page Title -->
+				<h1>Frequently Asked Questions</h1>
+				<!-- Page Description -->
+				<p>Welcome to the SnapGarden FAQ page! Here, you'll find answers to common questions about getting started, managing your account, and making the most of our app. Whether you're new to SnapGarden or looking for specific guidance, we've got you covered. If you don’t find what you’re looking for, feel free to reach out to our <a href="contact.html">support team</a>!</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Page Title  ====-->
+
+<!--=================================
+=            FAQ Section            =
+==================================-->
+<section class="faq section pt-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 m-auto">
+				<div class="block shadow">
+					<!-- Getting Started -->
+					<div class="faq-item">
+						<!-- Title -->
+						<div class="faq-item-title">
+							<h2>
+								Getting Started
+							</h2>
+						</div>
+						<!-- Get Started Accordion -->
+						<div id="gstAccordion" data-children=".item">
+						  <!-- Accordion Item 01 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#gstAccordion" href="#gstAccordion1">
+                                    How do I start using SnapGarden?
+							    </a>
+						  	</div>
+						    <div id="gstAccordion1" class="collapse show accordion-block">
+						      <p>
+                                Simply download the SnapGarden app from your preferred app store, create an account, and start snapping photos of your plants. The app will guide you through plant identification, care tips, and more.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 02 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#gstAccordion" href="#gstAccordion2">
+                                 What devices is SnapGarden compatible with?
+							    </a>
+						  	</div>
+						    <div id="gstAccordion2" class="collapse accordion-block">
+						      <p>
+                                SnapGarden is available for both iOS and Android devices. Make sure your device meets the minimum system requirements for the best experience.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 03 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#gstAccordion" href="#gstAccordion3">
+                                    Do I need any special equipment to use SnapGarden?
+							    </a>
+						  	</div>
+						    <div id="gstAccordion3" class="collapse accordion-block">
+						      <p>
+                                No special equipment is needed! All you need is your smartphone or tablet with a working camera to snap photos of your plants.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 04 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#gstAccordion" href="#gstAccordion4">
+                                Can SnapGarden identify all types of plants?
+							    </a>
+						  	</div>
+						    <div id="gstAccordion4" class="collapse accordion-block">
+						      <p>
+                                SnapGarden can identify a wide variety of plants, including houseplants, garden plants, and even some wild species. However, we’re constantly updating our database to improve accuracy and expand coverage.
+						      </p>
+						    </div>
+						  </div>
+						</div>
+					</div>
+					<!-- Account Accordion -->
+					<div class="faq-item">
+						<!-- Title -->
+						<div class="faq-item-title">
+							<h2>
+								Account
+							</h2>
+						</div>
+						<!-- Account Accordion -->
+						<div id="accountAccordion" data-children=".item">
+						  <!-- Accordion Item 01 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#accountAccordion" href="#accountAccordion1">
+                                How do I create an account?
+							    </a>
+						  	</div>
+						    <div id="accountAccordion1" class="collapse accordion-block">
+						      <p>
+                                You can create an account directly in the SnapGarden app by providing your email address and setting a password. Alternatively, you can sign up using your Google or Apple account for quick access.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 02 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#accountAccordion" href="#accountAccordion2">
+                                    Is my account information secure?
+							    </a>
+						  	</div>
+						    <div id="accountAccordion2" class="collapse accordion-block">
+						      <p>
+                                Yes, we take your privacy and security seriously. SnapGarden uses encryption to protect your data and does not share your personal information with third parties without your consent.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 03 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#accountAccordion" href="#accountAccordion3">
+                                    Can I use SnapGarden without creating an account?
+							    </a>
+						  	</div>
+						    <div id="accountAccordion3" class="collapse accordion-block">
+						      <p>
+                                Some features, like plant identification, may be available without an account. However, creating an account allows you to save your plant data, set reminders, and access personalized care tips.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 04 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#accountAccordion" href="#accountAccordion4">
+                                    How do I reset my password?
+							    </a>
+						  	</div>
+						    <div id="accountAccordion4" class="collapse accordion-block">
+						      <p>
+                                If you forget your password, click on the "Forgot Password" link on the login screen. Follow the instructions to reset your password via email.
+						      </p>
+						    </div>
+						  </div>
+						  <!-- Accordion Item 05 -->
+						  <div class="item">
+						  	<div class="item-link">
+							    <a data-toggle="collapse" data-parent="#accountAccordion" href="#accountAccordion5">
+                                    Can I delete my account?
+							    </a>
+						  	</div>
+						    <div id="accountAccordion5" class="collapse accordion-block">
+						      <p>
+                                Yes, you can delete your account at any time. Go to the account settings in the app, select "Delete Account," and follow the prompts. Please note that this action is permanent and will erase all your saved data.
+						      </p>
+						    </div>
+						  </div>
+						</div>
+					</div>
+					<!-- Getting Started Accordion -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--====  End of FAQ Section  ====-->
+
+<section class="call-to-action-app section bg-blue">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>It’s time to nurture your plants like never before!</h2>
+				<p>Join SnapGarden today and make plant care simple, smart, and stress-free!</p>
+				<ul class="list-inline">
+					<li class="list-inline-item">
+						<a href="sign-in.html" class="btn btn-rounded-icon">
+							Try out now!
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--============================
+=            Footer            =
+=============================-->
+<footer>
+	<div class="footer-main">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-lg-4 col-md-12 m-md-auto align-self-center">
+			<div class="block">
+			  <a href="index.html"><img src="images/logo-alt.png" alt="footer-logo"></a>
+			  <!-- Social Site Icons -->
+			  <ul class="social-icon list-inline">
+				<li class="list-inline-item">
+				  <a href="https://www.facebook.com"><i class="ti-facebook"></i></a>
+				</li>
+				<li class="list-inline-item">
+				  <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+				</li>
+				<li class="list-inline-item">
+				  <a href="https://www.instagram.com"><i class="ti-instagram"></i></a>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		  <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+			<div class="block-2">
+			  <!-- heading -->
+			  <h6>Product</h6>
+			  <!-- links -->
+			  <ul>
+				<li><a href="FAQ.html">FAQs</a></li>
+			  </ul>
+			</div>
+		  </div>
+		  <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+			<div class="block-2">
+			  <!-- heading -->
+			  <h6>Resources</h6>
+			  <!-- links -->
+			  <ul>
+				<li><a href="sign-up.html">Sign Up</a></li>
+				<li><a href="sign-in.html">Log In</a></li>
+			  </ul>
+			</div>
+		  </div>
+		  <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+			<div class="block-2">
+			  <!-- heading -->
+			  <h6>Company</h6>
+			  <!-- links -->
+			  <ul>
+				<li><a href="about.html">About</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </footer>
+  
+	<!-- To Top -->
+	<div class="scroll-top-to">
+	  <i class="ti-angle-up"></i>
+	</div>
+	
+	<!-- JAVASCRIPTS -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+	<script src="plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="plugins/slick/slick.min.js"></script>
+	<script src="plugins/fancybox/jquery.fancybox.min.js"></script>
+	<script src="plugins/syotimer/jquery.syotimer.min.js"></script>
+	<script src="plugins/aos/aos.js"></script>
+	<script src="js/script.js"></script>
+  </body>
+  
+  </html>
