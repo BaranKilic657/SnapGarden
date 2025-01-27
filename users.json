@@ -1,1 +1,67 @@
-[{"username": "Max", "email": "max@mustermann.de", "password": "$argon2id$v=19$m=65536,t=3,p=4$o6dzTrPjj7uIE6QQtq/C9w$y30e9tLOuUjVaKpDwGLSr17ytCogVRnS/A0SvA9cVvA"}]
+[
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$o6dzTrPjj7uIE6QQtq/C9w$y30e9tLOuUjVaKpDwGLSr17ytCogVRnS/A0SvA9cVvA"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$nAbIqEepcgfZtKWol0nqqA$FlsIOiehazk5LgO+MGPQ5tAQfOXbyKotW2m10ruCb1U"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$q9aE7FN/EHAWcHgfry1knw$EOQDmyqz+eXy/JuO3pFRn05WNFLKVvMMqgtrLrAYuPw"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$aU0NwZLKumqA/fshT/aiMA$bfaNQRU13Jr5qD0fmYYONo46o5jYaLUPC2Dg382cR5A"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$D+JvMye7YvycFDBSs3NcyA$fBaJIIiEMdjaYroEDzLK1upz4F4yM9Bw+ZMvyx85fP4"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$slBUspkSuRk3RriD+Zygcw$SRfTKlfZ2cM91bYd0WNrhNngAQ6Efy1QnvYx24JX3I4"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$Pvrc9zNpZIXkLuH5xvtxPg$EUWrcnj1KmGkwu11LHuXVQrUGzZfZpTY30RuyKqtryQ"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$9geAewU1I0YNfDgsIoRQLA$/hPTHAaZbTTboTza2to5PW7nst44KqjzmrGccs5NaMM"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$P6XipZTsKbD6OubkehUw4A$3Kc13EOGpzbV3lqjQrcVKJeDQHMASe76WiX+Kr8wVHg"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$h/rz8fZ0Tkbtiwuiu/N3ww$2ClvNhOmEIUFFiH7RreeNza2RWRkQw9Lwz2XCV1ney0"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$XH4VMHtiBeJ0OFzCh7QyWw$0unyG55zDrAMSpGZytD92xNsxcEcVJkKaNS7B3w+sqA"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$t8xO4DE58or+G8Utmb7GHw$ZHYAgXickAxfNTCiF8m1MR4ImyJz+O9Yqszyz5YIpqQ"
+    },
+    {
+        "username": "Max",
+        "email": "max@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$fwJYZBUSISWmWUJVKLb7+Q$BgvJWdQej2kOS6mzhJYv0uZLVlYaOcgoUDz/mdBMMXU"
+    }
+]

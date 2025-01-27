@@ -1,6 +1,21 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import sys
 from sign_up_handler import handle_signup
+
+def handle_request():
+    try:
+        content = sys.stdin.read()
+        print("Received data:", content)  # Log the raw request body
+        data = json.loads(content)
+        response = handle_signup(data)
+    except Exception as e:
+        print(f"Error processing request: {e}")
+        response = {'status': 'error', 'message': str(e)}
+
+    # Send the response back to the client
+    print("Content-Type: application/json\n")
+    print(json.dumps(response))
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
