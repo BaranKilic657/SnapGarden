@@ -191,6 +191,43 @@
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
+    <script>
+        async function analyzePhoto(input) {
+            const file = input.files[0]; // Get the uploaded file
+    
+            if (!file) {
+                alert("Please upload a valid image.");
+                return;
+            }
+    
+            // Prepare the form data
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("question", "What plant is this?"); // Customize your question here
+    
+            try {
+                // Call the backend API
+                const response = await fetch("http://127.0.0.1:8000/analyze", {
+                    method: "POST",
+                    body: formData,
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+    
+                const data = await response.json(); // Parse the response
+                const result = data.answer; // Get the "answer" from the backend
+    
+                // Display the result
+                alert(`AI Response: ${result}`);
+            } catch (error) {
+                console.error("Error during API call:", error);
+                alert("Something went wrong. Please try again.");
+            }
+        }
+    </script>
+    
 
 </body>
 
