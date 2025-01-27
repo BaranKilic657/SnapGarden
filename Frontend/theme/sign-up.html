@@ -50,15 +50,15 @@
 						<div class="title-text">
 							<h3>Sign Up for New Account</h3>
 						</div>
-						<form action="#">
+						<form id="signup-form">
 							<!-- Username -->
-							<input class="form-control main" type="text" placeholder="Your Name" required>
+							<input class="form-control main" type="text" id="username" placeholder="Your Name" required>
 							<!-- Email -->
-							<input class="form-control main" type="email" placeholder="Email Address" required>
+							<input class="form-control main" type="email" id="email" placeholder="Email Address" required>
 							<!-- Password -->
-							<input class="form-control main" type="password" placeholder="Password" required>
+							<input class="form-control main" type="password" id="password" placeholder="Password" required>
 							<!-- Submit Button -->
-							<a href="sign-in.html" class="btn btn-main-md">Sign Up</a>
+							<button type="submit" class="btn btn-main-md">Sign Up</button>
 						</form>
 						<div class="new-acount">
 							<p>By clicking “Sign Up” I agree to Terms of Conditions.</p>
@@ -87,6 +87,44 @@
   <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
   <script src="plugins/aos/aos.js"></script>  
   <script src="js/script.js"></script>
+
+  <!-- Custom Script to handle form submission -->
+<script>
+	document.getElementById('signup-form').addEventListener('submit', function(event) {
+		event.preventDefault();  // Prevent the default form submission
+	
+		const username = document.getElementById('username').value;
+		const email = document.getElementById('email').value;
+		const password = document.getElementById('password').value;
+	
+		const data = {
+			username: username,
+			email: email,
+			password: password
+		};
+	
+		// Send data to sign-up handler script using fetch
+		fetch('http://localhost:8080/signup', {
+        	method: 'POST',
+        	headers: {
+            	'Content-Type': 'application/json',
+        	},
+        	body: JSON.stringify(data),
+    	})
+    	.then(response => response.json())
+    	.then(responseData => {
+        	alert(responseData.message);
+        	if (responseData.status === 'success') {
+            	window.location.href = 'sign-in.html';  // Weiterleitung zur Anmeldeseite
+        	}
+    	})
+    	.catch(error => {
+        	console.error('Fehler:', error);
+        	alert('Es ist ein Fehler aufgetreten. Bitte versuche es später erneut.');
+    	});
+	});
+	</script>
+	
 </body>
 
 </html>
