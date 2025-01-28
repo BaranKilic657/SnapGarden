@@ -5,21 +5,21 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  # Core CPU-only PyTorch stack via conda
-  - pytorch::pytorch=2.0.1=cpu*
-  - pytorch::torchvision=0.15.2=cpu*
-  - pytorch::torchaudio=2.0.2=cpu*
-  # Essential utilities
+  # Core packages via conda
+  - pytorch=2.0.1=cpu_py310h*  # Explicit CPU build
+  - torchvision=0.15.2=cpu_py310h*
+  # ML ecosystem
+  - transformers=4.34.0
+  - peft=0.6.2
+  - datasets=2.14.5
+  # Web server
+  - fastapi=0.103.2
+  - uvicorn=0.23.2
+  # System utilities
   - pip=23.3.1
   - numpy=1.24.3
-  # Python packages via pip
+  # Pure Python packages via pip
   - pip:
-      - transformers==4.34.0
-      - peft==0.6.2
-      - datasets==2.14.5
-      - accelerate==0.24.1  # Needed for PEFT
-      - pillow==10.0.1      # Image support for BLIP-2
-      - requests==2.31.0
-      - fastapi
-      - uvicorn
-
+      - torchaudio==2.0.2+cpu
+      - accelerate==0.24.1  # Required for PEFT
+      - bitsandbytes==0.41.3.1  # CPU-compatible version
