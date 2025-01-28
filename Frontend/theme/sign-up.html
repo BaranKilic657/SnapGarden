@@ -26,6 +26,9 @@
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
 
+  <!-- Include Axios Library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
@@ -88,61 +91,57 @@
   <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
   <script src="plugins/aos/aos.js"></script>  
   <script src="js/script.js"></script>
-</body>
 
-<script>
-	document.getElementById('signupForm').addEventListener('submit', function(event) {
-		event.preventDefault();
-		
-		// Collect form data
-		const username = document.getElementById('username').value;
-		const email = document.getElementById('email').value;
-		const password = document.getElementById('password').value;
-		
-		// Clear any previous messages
-		const messageDiv = document.getElementById('formMessage');
-		messageDiv.textContent = '';
-		messageDiv.style.color = ''; // Reset color
+  <script>
+	document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    // Collect form data
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // Clear any previous messages
+    const messageDiv = document.getElementById('formMessage');
+    messageDiv.textContent = '';
+    messageDiv.style.color = ''; // Reset color
 
-		const userData = {
-			username: username,
-			email: email,
-			password: password
-		};
-	
-		// Send the user data to the sign-up handler
-		fetch('http://localhost:8080/signup', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(userData)
-		})
-		.then(response => {
-			// Ensure fetch only passes valid JSON
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			return response.json();
-		})
-		.then(data => {
-			if (data.status === 'success') {
-				messageDiv.textContent = 'User created successfully!';
-				messageDiv.style.color = 'green';
-				setTimeout(() => {
-					window.location.href = 'sign-in.html'; // Redirect after success
-				}, 2000);
-			} else {
-				messageDiv.textContent = data.message; // Display error message
-				messageDiv.style.color = 'red';
-			}
-		})
-		.catch(error => {
-			messageDiv.textContent = 'Error: ' + error.message;
-			messageDiv.style.color = 'red';
-		});
-	});
+    const userData = {
+        username: username,
+        email: email,
+        password: password
+    };
+
+    console.log('Sending data:', userData); // Debugging statement
+
+    try {
+        // Sending data via axios instead of fetch
+        const response = await axios.post('http://localhost:8080/signup', userData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Handle the response
+        console.log('Response received:', response); // Debugging statement
+        if (response.data.status === 'success') {
+            messageDiv.textContent = 'User created successfully!';
+            messageDiv.style.color = 'green';
+            setTimeout(() => {
+                window.location.href = 'sign-in.html'; // Redirect after success
+            }, 2000);
+        } else {
+            messageDiv.textContent = response.data.message; // Display error message
+            messageDiv.style.color = 'red';
+        }
+    } catch (error) {
+        console.error('Axios error:', error); // Debugging statement
+        messageDiv.textContent = 'Error: ' + error.message;
+        messageDiv.style.color = 'red';
+    }
+});
 </script>
 
+</body>
 
 </html>

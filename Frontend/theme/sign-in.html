@@ -47,13 +47,13 @@
 							<h3>Sign in to To Your Account</h3>
 						</div>
 						<form id="signinForm">
-							<!-- Username -->
-							<input class="form-control main" id="signinUsername" type="text" placeholder="Email Address" required>
+							<!-- Email -->
+							<input class="form-control main" id="signinEmail" type="email" placeholder="Email Address" required> <!-- Updated to 'signinEmail' -->
 							<!-- Password -->
 							<input class="form-control main" id="signinPassword" type="password" placeholder="Password" required>
 							<!-- Submit Button -->
 							<button type="submit" class="btn btn-main-md">Sign In</button>
-						  </form>
+						</form>
 						<div class="new-acount">
 							<a href="contact.html">Forgot your password?</a>
 							<p>Don't Have an account? <a href="sign-up.html"> SIGN UP</a></p>
@@ -85,11 +85,11 @@
 	document.getElementById('signinForm').addEventListener('submit', function(event) {
 		event.preventDefault();
 		
-		const username = document.getElementById('signinUsername').value;
+		const email = document.getElementById('signinEmail').value;
 		const password = document.getElementById('signinPassword').value;
 		
 		const userData = {
-			username: username,
+			email: email,
 			password: password
 		};
 	

@@ -14,9 +14,11 @@ def handle_signup(data):
     try:
         # Check if users.json exists, or create a new file if it doesn't
         if os.path.exists('users.json'):
+            print("Found users.json. Loading existing users.")
             with open('users.json', 'r') as file:
                 users = json.load(file)  # Load existing users
         else:
+            print("No users.json found. Creating a new user list.")
             users = []
 
         # Extract the user's details from the input data
@@ -29,8 +31,10 @@ def handle_signup(data):
         duplicate_email = any(user['email'] == email for user in users)
 
         if duplicate_username:
+            print(f"Username '{username}' is already taken.")
             return {'status': 'error', 'message': 'The username is already taken. Please choose a different username.'}
         if duplicate_email:
+            print(f"Email '{email}' is already registered.")
             return {'status': 'error', 'message': 'The email is already registered. Please use a different email address.'}
 
         # Hash the user's password
@@ -46,9 +50,11 @@ def handle_signup(data):
         with open('users.json', 'w') as file:
             json.dump(users, file, indent=4)
 
+        print(f"New user '{username}' created successfully.")
         return {'status': 'success', 'message': 'User created successfully'}
 
     except Exception as e:
+        print(f"Error during sign-up: {str(e)}")
         return {'status': 'error', 'message': str(e)}
 
 # For testing purposes, to simulate a sign-up request
