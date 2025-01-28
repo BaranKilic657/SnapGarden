@@ -150,9 +150,24 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Chat with SnapGarden</h4>
-                                <div id="chat-box" style="border: 1px solid beige; border-radius: 10px; padding: 15px; height: 400px; overflow-y: auto; background-color: #f9f9f9;">
+                                
+                                <!-- ADDITION (display:flex + flex-direction for #chat-box) -->
+                                <div 
+                                  id="chat-box" 
+                                  style="
+                                       border: 1px solid beige; 
+                                       border-radius: 10px; 
+                                       padding: 15px; 
+                                       height: 400px; 
+                                       overflow-y: auto; 
+                                       background-color: #f9f9f9;
+                                       display: flex; 
+                                       flex-direction: column;
+                                  "
+                                >
                                     <!-- Messages will appear here -->
                                 </div>
+
                                 <form id="chat-form" class="mt-3 d-flex">
                                     <input 
                                         type="text" 
@@ -196,52 +211,83 @@
     <script>
         document.getElementById('chat-form').addEventListener('submit', async (event) => {
             event.preventDefault();
-    
-            // Get form elements
+        
             const questionInput = document.getElementById('question');
             const chatBox = document.getElementById('chat-box');
-    
-            // Add user's message to the chat box with refined green styling
+        
+            // --------------------------
+            // 1) User message (LEFT)
+            // --------------------------
             const userMessage = document.createElement('div');
             userMessage.textContent = questionInput.value;
-            userMessage.style.cssText = "background-color: #32cd32; color: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-end; max-width: 75%;";  // Softer green background
-            userMessage.classList.add('d-flex', 'justify-content-end');
+        
+            userMessage.style.cssText = `
+                background-color: #32cd32;
+                color: white;
+                padding: 10px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                align-self: flex-start;    /* Left side in a column flex */
+                max-width: 75%;
+            `;
+            userMessage.classList.add('d-flex', 'justify-content-start'); 
+        
             chatBox.appendChild(userMessage);
             chatBox.scrollTop = chatBox.scrollHeight;
-    
+        
             // Prepare form data
             const formData = new FormData();
             formData.append('question', questionInput.value);
-    
+        
             questionInput.value = '';
-    
+        
             try {
-                // Send POST request to FastAPI endpoint
+                // POST to FastAPI
                 const response = await axios.post('http://localhost:8000/analyze', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
+                    headers: { 'Content-Type': 'multipart/form-data' },
                 });
-    
-                // Display AI response in the chat box
+        
+                // --------------------------
+                // 2) AI answer (RIGHT)
+                // --------------------------
                 const aiMessage = document.createElement('div');
                 aiMessage.textContent = response.data.answer;
-                aiMessage.style.cssText = "background-color: #e9ecef; color: black; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start; max-width: 75%;";
-                aiMessage.classList.add('d-flex', 'justify-content-start');
+        
+                aiMessage.style.cssText = `
+                    background-color: #e9ecef;
+                    color: black;
+                    padding: 10px;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    align-self: flex-end;     /* Right side in a column flex */
+                    max-width: 75%;
+                `;
+                aiMessage.classList.add('d-flex', 'justify-content-end'); 
+        
                 chatBox.appendChild(aiMessage);
                 chatBox.scrollTop = chatBox.scrollHeight;
             } catch (error) {
                 console.error('Error:', error);
-    
+        
                 const errorMessage = document.createElement('div');
                 errorMessage.textContent = 'An error occurred while processing your request.';
-                errorMessage.style.cssText = "background-color: #dc3545; color: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start; max-width: 75%;";
-                errorMessage.classList.add('d-flex', 'justify-content-start');
+                errorMessage.style.cssText = `
+                    background-color: #dc3545;
+                    color: white;
+                    padding: 10px;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    align-self: flex-end;
+                    max-width: 75%;
+                `;
+                errorMessage.classList.add('d-flex', 'justify-content-end');
+        
                 chatBox.appendChild(errorMessage);
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
         });
     </script>
+        
 </body>
 
 </html>
