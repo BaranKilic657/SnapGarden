@@ -26,6 +26,9 @@
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
 
+  <!-- Include Axios Library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
@@ -50,16 +53,17 @@
 						<div class="title-text">
 							<h3>Sign Up for New Account</h3>
 						</div>
-						<form action="#">
+						<div id="formMessage" style="margin-top: 10px; font-weight: bold;"></div>
+						<form id="signupForm">
 							<!-- Username -->
-							<input class="form-control main" type="text" placeholder="Your Name" required>
+							<input class="form-control main" id="username" type="text" placeholder="Your Name" required>
 							<!-- Email -->
-							<input class="form-control main" type="email" placeholder="Email Address" required>
+							<input class="form-control main" id="email" type="email" placeholder="Email Address" required>
 							<!-- Password -->
-							<input class="form-control main" type="password" placeholder="Password" required>
+							<input class="form-control main" id="password" type="password" placeholder="Password" required>
 							<!-- Submit Button -->
-							<a href="sign-in.html" class="btn btn-main-md">Sign Up</a>
-						</form>
+							<button type="submit" class="btn btn-main-md">Sign Up</button>
+						  </form>
 						<div class="new-acount">
 							<p>By clicking “Sign Up” I agree to Terms of Conditions.</p>
 							<p>Already have an account? <a href="sign-in.html">SIGN IN</a></p>
@@ -87,6 +91,57 @@
   <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
   <script src="plugins/aos/aos.js"></script>  
   <script src="js/script.js"></script>
+
+  <script>
+	document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    // Collect form data
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // Clear any previous messages
+    const messageDiv = document.getElementById('formMessage');
+    messageDiv.textContent = '';
+    messageDiv.style.color = ''; // Reset color
+
+    const userData = {
+        username: username,
+        email: email,
+        password: password
+    };
+
+    console.log('Sending data:', userData); // Debugging statement
+
+    try {
+        // Sending data via axios instead of fetch
+        const response = await axios.post('http://localhost:8080/signup', userData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Handle the response
+        console.log('Response received:', response); // Debugging statement
+        if (response.data.status === 'success') {
+            messageDiv.textContent = 'User created successfully!';
+            messageDiv.style.color = 'green';
+            setTimeout(() => {
+                window.location.href = 'sign-in.html'; // Redirect after success
+            }, 2000);
+        } else {
+            messageDiv.textContent = response.data.message; // Display error message
+            messageDiv.style.color = 'red';
+        }
+    } catch (error) {
+        console.error('Axios error:', error); // Debugging statement
+        messageDiv.textContent = 'Error: ' + error.message;
+        messageDiv.style.color = 'red';
+    }
+});
+</script>
+
 </body>
 
 </html>
