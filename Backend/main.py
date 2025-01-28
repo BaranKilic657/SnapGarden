@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, Form
+from typing import Optional
 import torch
 from PIL import Image
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
@@ -18,15 +19,22 @@ def read_root():
     return {"message": "Welcome to the SnapGarden API!"}
 
 @app.post("/analyze")
-async def analyze_image(file: UploadFile = File(...), question: str = Form(...)):
+async def analyze_image_or_question(
+    file: Optional[UploadFile] = None, 
+    question: str = Form(...)
+):
     """
-    Accepts an image and a question, analyzes them, and returns an answer.
+    Accepts an image and/or a question, analyzes them, and returns an answer.
     """
-    # Open uploaded image and convert it to RGB
-    image = Image.open(file.file).convert("RGB")
+    if file:
+        # Process the uploaded image
+        image = Image.open(file.file).convert("RGB")
+        inputs = processor(image, question, return_tensors="pt").to("cuda", torch.float16)
+    else:
+        # Process only the question
+        inputs = processor(question, return_tensors="pt").to("cuda", torch.float16)
 
-    # Process the question and image through the model
-    inputs = processor(image, question, return_tensors="pt").to("cuda", torch.float16)
+    # Generate model output
     output = model.generate(**inputs)
 
     # Generate answer
