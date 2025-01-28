@@ -2,9 +2,7 @@ from fastapi import FastAPI, File, UploadFile, Form
 from typing import Optional
 import torch
 import logging
-from fastapi import FastAPI, UploadFile, File, Form
 from PIL import Image
-import torch
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
 from peft import PeftModel
 
@@ -46,51 +44,36 @@ def read_root():
 @app.post("/analyze")
 async def analyze_image_or_question(
     file: Optional[UploadFile] = None, 
-    question: str = Form(...)
+    question: str = Form(...),
 ):
     """
     Accepts an image and/or a question, analyzes them, and returns an answer.
     """
     if file:
-        # Process the uploaded image
+        # If an image is uploaded, process the image along with the question
         image = Image.open(file.file).convert("RGB")
-        inputs = processor(image, question, return_tensors="pt").to(device, dtype)
+
+        inputs = processor(image, question, return_tensors="pt").to(device, dtype=dtype)
     else:
-        # Process only the question
-        inputs = processor(question, return_tensors="pt").to(device, dtype)
+        # If no image is uploaded, only process the question
+        inputs = processor(question, return_tensors="pt").to(device, dtype=dtype)
 
     # Generate model output
     output = model.generate(**inputs)
-    # Open uploaded image and convert it to RGB
-    image = Image.open(file.file).convert("RGB")
-    float_dtype = torch.float16 if device == "cuda" else torch.float32
-    
-    complete_question = f"Question: {question} Answer:"
 
-    # Process the question and image through the model
-    inputs = processor(image, complete_question, return_tensors="pt").to(device=device, dtype=float_dtype)
-    
-    # Debug: Print the inputs
-    logging.debug(f"Inputs: {inputs}")
-
-    out = model.generate(
-        **inputs,
-        max_new_tokens=80,  # Extend from default 30 to ~100 words
-        num_beams=5,         # Better than greedy search
-        repetition_penalty=5.0,  # Reduce redundancy
-        temperature=0.4,     # Balance creativity/factuality
-        early_stopping=True
-    )
-    print(processor.decode(out[0], skip_special_tokens=True).strip())
-    
     # Debug: Print the raw output
-    logging.debug(f"Raw output: {out}")
+    logging.debug(f"Raw output: {output}")
 
-    # Generate answer
-    answer = processor.decode(out[0], skip_special_tokens=True).strip()
-    
+    # Decode the output
+    answer = processor.decode(output[0], skip_special_tokens=True).strip()
+
     # Debug: Print the decoded answer
     logging.debug(f"Decoded answer: {answer}")
 
-    # Return the answer
-    return {"answer": answer}
+    # Assuming the model's answer is a plant name at the beginning (could be adjusted depending on model output)
+    plant_name = answer.split(' ')[0]  # Simple approach: assume first word is the plant name
+    if not plant_name:
+        plant_name = "Unknown Plant"  # Default to "Unknown" if no plant name detected
+
+    # Return the answer and plant name for frontend use
+    return {"answer": answer, "plant_name": plant_name}

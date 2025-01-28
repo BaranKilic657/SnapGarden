@@ -87,7 +87,6 @@ Once you've completed the installation, you can start using SnapGarden!
 - **AI/ML Models**: ******* for plant identification and health analysis.  
 - **Backend**: 
 - **Frontend**: Built with JavaScript frameworks.  
-- **Cloud**: Deployment on cloud platforms like AWS or Azure (depending on user choice).
 
 ---
 
