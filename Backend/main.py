@@ -2,9 +2,7 @@ from fastapi import FastAPI, File, UploadFile, Form
 from typing import Optional
 import torch
 import logging
-from fastapi import FastAPI, UploadFile, File, Form
 from PIL import Image
-import torch
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
 from peft import PeftModel
 
@@ -46,7 +44,7 @@ def read_root():
 @app.post("/analyze")
 async def analyze_image_or_question(
     file: Optional[UploadFile] = None, 
-    question: str = Form(...)
+    question: str = Form(...),
 ):
     """
     Accepts an image and/or a question, analyzes them, and returns an answer.
@@ -61,8 +59,6 @@ async def analyze_image_or_question(
 
     # Generate model output
     output = model.generate(**inputs)
-    # Open uploaded image and convert it to RGB
-    image = Image.open(file.file).convert("RGB")
     float_dtype = torch.float16 if device == "cuda" else torch.float32
     
     complete_question = f"Question: {question} Answer:"
@@ -81,16 +77,23 @@ async def analyze_image_or_question(
         temperature=0.4,     # Balance creativity/factuality
         early_stopping=True
     )
-    print(processor.decode(out[0], skip_special_tokens=True).strip())
-    
+
     # Debug: Print the raw output
     logging.debug(f"Raw output: {out}")
 
-    # Generate answer
+    # Decode the output
     answer = processor.decode(out[0], skip_special_tokens=True).strip()
-    
+
     # Debug: Print the decoded answer
     logging.debug(f"Decoded answer: {answer}")
 
-    # Return the answer
-    return {"answer": answer}
+    # If the answer looks like a plant name, clean the response (this depends on your model's output)
+    # Let's assume the model's answer will contain something like "Rose" or "Sunflower"
+    # You might need to adjust this depending on your model's format.
+
+    plant_name = answer.split(' ')[0]  # Assuming the plant name is the first word (simple approach)
+    if not plant_name:
+        plant_name = "Unknown Plant"  # Default to "Unknown" if no plant name detected
+
+    # Return the answer and plant name for frontend use
+    return {"answer": answer, "plant_name": plant_name}
