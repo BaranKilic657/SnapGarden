@@ -60,13 +60,13 @@ Create a conda environment depending on required configuration and limits.
 
 **For GPU**
 ```bash
-conda env create -f environment_gpu.yml
+conda env create -f environment_gpu.yaml
 conda activate SnapGarden_GPU
 ```
 
 **For CPU**
 ```bash
-conda env create -f environment-cpu.yml
+conda env create -f environment_cpu.yaml
 conda activate SnapGarden_CPU
 ```
 

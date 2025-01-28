@@ -20,8 +20,9 @@ app.add_middleware(
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Model name (BLIP-2)
-model_name = "Salesforce/blip2-opt-2.7b"
+
+model_name = "Baran657/blip_2_snapgarden"
+
 
 # Load AI model and processor
 processor = Blip2Processor.from_pretrained(model_name)
@@ -30,9 +31,8 @@ processor = Blip2Processor.from_pretrained(model_name)
 if torch.cuda.is_available():
     device = "cuda"
     dtype = torch.float16
-    model = Blip2ForConditionalGeneration.from_pretrained(
-        model_name, device_map="auto", load_in_8bit=True
-    )
+    base_model = Blip2ForConditionalGeneration.from_pretrained(model_name, device_map="auto", torch_dtype=dtype)
+
 else:
     device = "cpu"
     dtype = torch.float32
@@ -41,7 +41,41 @@ else:
     )
     torch.set_num_threads(4)  # Adjust based on your CPU's core count
     torch.set_num_interop_threads(2)  # Adjust for inter-operation parallelism
-    model = torch.compile(model, dynamic=False)
+    # model = torch.compile(model, dynamic=False)
+    
+def check_plant_name(plant_name):
+    """
+    Accepted plant names:
+        "Cactus"
+        "Boston Fern"
+        "Basil"
+        "Flamingo Flower"
+        "Aloe Vera"
+        "Elephant Ear"
+        "Calathea"
+        "Chili Plant"
+        "Spider Plant"
+        "Citrus Plant"
+        "Dumb Cane (Dieffenbachia)"
+        "Dragon Tree (Dracaena)"
+        "Weeping Fig (Ficus benjamina)"
+        "Mint"
+        "Monstera"
+        "Orchid"
+        "Parsley"
+        "Philodendron"
+        "Pothos"
+        "Rosemary"
+        "Snake Plant (Sansevieria)"
+        "Peace Lily"
+        "Succulent"
+        "Tomato Plant"
+        "ZZ Plant (Zamioculcas zamiifolia)"
+    """
+    if "Cactus" in plant_name:
+        return {True, plant_name}
+    else:
+        return {False, "Unknown Plant"}
 
 @app.get("/")
 def read_root():
@@ -76,6 +110,8 @@ async def analyze_image_or_question(
                 )
         else:
             image = None
+            
+        question = f"Question: {question} Answer:"
 
         # Prepare inputs for the model
         if image:
@@ -85,7 +121,10 @@ async def analyze_image_or_question(
             inputs = processor(text=question, return_tensors="pt").to(device, dtype=dtype)
 
         # Generate model output
-        output = model.generate(**inputs)
+        output = model.generate(**inputs,
+                      max_length=80,
+                      repetition_penalty=1.5,
+                      length_penalty=1.0)
 
         # Decode the output
         answer = processor.decode(output[0], skip_special_tokens=True).strip()
@@ -114,6 +153,15 @@ def extract_plant_name(answer: str) -> str:
     plant_keywords = ["rose", "tulip", "sunflower", "oak", "maple", "aloe vera", "cactus", "fern"]  # Add more plant names
     answer_lower = answer.lower()
 
+    # Debug: Print the decoded answer
+    logging.debug(f"Decoded answer: {answer}")
+    
+    is_plant_name, plant_name = check_plant_name(answer)
+    
+    if not is_plant_name:
+        logging.warning(f"Unknown plant name: {plant_name}")
+    else:
+        logging.info(f"Plant name: {plant_name}")
     # Look for plant keywords in the answer
     for keyword in plant_keywords:
         if keyword in answer_lower:
