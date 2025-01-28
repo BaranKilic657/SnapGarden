@@ -85,7 +85,7 @@ Once you've completed the installation, you can start using SnapGarden!
 ## Technologies Used  
 
 - **AI/ML Models**: ******* for plant identification and health analysis.  
-- **Backend**: 
+- **Backend**: Built with Python.
 - **Frontend**: Built with JavaScript frameworks.  
 
 ---
