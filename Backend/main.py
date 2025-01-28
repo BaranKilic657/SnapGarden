@@ -12,7 +12,7 @@ app = FastAPI()
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
-model_name = "Salesforce/blip2-opt-2.7b"
+model_name = "Baran657/blip_2_snapgarden"
 
 # Load AI model and processor
 processor = Blip2Processor.from_pretrained(model_name)
@@ -20,12 +20,7 @@ processor = Blip2Processor.from_pretrained(model_name)
 if torch.cuda.is_available():
     device = "cuda"
     dtype = torch.float16
-    base_model = Blip2ForConditionalGeneration.from_pretrained(model_name, device_map="auto", load_in_8bit=True)
-    model = PeftModel.from_pretrained(
-                    base_model,
-                    "Salesforce/blip2-opt-2.7b",  # Replace with your HF Hub path
-                    device_map="auto",
-    )
+    base_model = Blip2ForConditionalGeneration.from_pretrained(model_name, device_map="auto", torch_dtype=dtype)
 else:
     device = "cpu"
     dtype = torch.float32
