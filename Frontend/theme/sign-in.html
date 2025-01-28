@@ -46,13 +46,13 @@
 						<div class="title-text">
 							<h3>Sign in to To Your Account</h3>
 						</div>
-						<form action="#">
-							<!-- Username -->
-							<input class="form-control main" type="text" placeholder="Email Address" required>
+						<form id="signinForm">
+							<!-- Email -->
+							<input class="form-control main" id="signinEmail" type="email" placeholder="Email Address" required> <!-- Updated to 'signinEmail' -->
 							<!-- Password -->
-							<input class="form-control main" type="password" placeholder="Password" required>
+							<input class="form-control main" id="signinPassword" type="password" placeholder="Password" required>
 							<!-- Submit Button -->
-							<a href="dashboard.html" class="btn btn-main-md">Sign In</a>
+							<button type="submit" class="btn btn-main-md">Sign In</button>
 						</form>
 						<div class="new-acount">
 							<a href="contact.html">Forgot your password?</a>
@@ -80,5 +80,40 @@
   <script src="plugins/aos/aos.js"></script> 
   <script src="js/script.js"></script>
 </body>
+
+<script>
+	document.getElementById('signinForm').addEventListener('submit', function(event) {
+		event.preventDefault();
+		
+		const email = document.getElementById('signinEmail').value;
+		const password = document.getElementById('signinPassword').value;
+		
+		const userData = {
+			email: email,
+			password: password
+		};
+	
+		// Send the user data to the sign-in handler
+		fetch('http://localhost:8080/signin', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(userData)
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.status === 'success') {
+				alert('Login successful!');
+				window.location.href = 'dashboard.html'; // Redirect to dashboard
+			} else {
+				alert('Error: ' + data.message);
+			}
+		})
+		.catch(error => {
+			alert('Error: ' + error.message);
+		});
+	});
+	</script>
 
 </html>
