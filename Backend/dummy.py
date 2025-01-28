@@ -1,4 +1,4 @@
-#file to create dummy image for chat function
+#file to create dummy image for chat
 
 from PIL import Image
 
