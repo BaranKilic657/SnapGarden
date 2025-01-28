@@ -5,6 +5,7 @@ import logging
 from PIL import Image
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 # Create FastAPI app
 app = FastAPI()
@@ -103,40 +104,40 @@ async def analyze_image_or_question(
     question: str = Form("Identify the plant in the image. Return only the plant name with no extra words.")
 ):
     """
-    Accepts an image and/or a question, analyzes them, and returns an answer + recognized plant name.
+    Endpoint that either accepts an image for analysis or uses a dummy image
+    if none is provided.
     """
     try:
-        # Validate the uploaded file (if provided)
         image = None
+        # Check if user uploaded a file
         if file:
+            # Validate that it's actually an image
             if not file.content_type.startswith("image/"):
                 raise HTTPException(
                     status_code=400, detail="Uploaded file must be an image."
                 )
-            try:
-                logging.debug(f"File content type: {file.content_type}")
-                logging.debug(f"File size: {file.size if hasattr(file, 'size') else 'Unknown'}")
-                image = Image.open(file.file).convert("RGB")
-                logging.debug("Image successfully opened and converted to RGB.")
-            except Exception as e:
-                logging.error(f"Error opening image: {str(e)}")
+            # Attempt to open the uploaded image
+            image = Image.open(file.file).convert("RGB")
+            logging.debug("Opened user-uploaded image successfully.")
+        else:
+            # No file uploaded, so load the dummy image
+            dummy_path = "dummy.png"  # Ensure this file exists in your project
+            if not os.path.isfile(dummy_path):
                 raise HTTPException(
-                    status_code=400, detail="Invalid or corrupted image file."
+                    status_code=500,
+                    detail="No image file was provided, and dummy.png is missing from the server."
                 )
 
-        # Provide a more direct prompt for the model
-        # e.g., "Identify exactly which plant is in the image. Nothing else. e.g. 'Aloe Vera'."
+            logging.debug("No file uploaded; using dummy image.")
+            with open(dummy_path, "rb") as f:
+                image = Image.open(f).convert("RGB")
+
         prompt = f"Question: {question} Answer:"
         logging.debug(f"Prompt sent to the model: {prompt}")
 
-        # Prepare inputs for the model
-        if image:
-            inputs = processor(image, prompt, return_tensors="pt").to(device, dtype=dtype)
-        else:
-            # If no image is provided, only process the question
-            inputs = processor(text=prompt, return_tensors="pt").to(device, dtype=dtype)
+        # Prepare inputs with the image
+        inputs = processor(image, prompt, return_tensors="pt").to(device, dtype=dtype)
 
-        # Generate model output
         output = model.generate(
             **inputs,
             max_length=80,
@@ -144,22 +145,30 @@ async def analyze_image_or_question(
             length_penalty=1.0
         )
 
-        # Decode the output
-        answer = processor.decode(output[0], skip_special_tokens=True).strip()
-        logging.debug(f"Decoded answer from model: {answer}")
+        # Decode and strip any leading/trailing whitespace
+        raw_answer = processor.decode(output[0], skip_special_tokens=True).strip()
+        logging.debug(f"Decoded raw answer from model: {raw_answer}")
 
-        # Extract a final plant name
-        plant_name = extract_plant_name(answer)
-        if not plant_name:
-            plant_name = "Unknown Plant"
+        # Remove "Question: ..." and "Answer:" if found in the output
+        answer = raw_answer
+        if "Question:" in answer:
+            answer = answer.split("Question:", 1)[1].strip()
+        if "Answer:" in answer:
+            answer = answer.split("Answer:", 1)[1].strip()
 
-        # Return the raw model answer and the extracted plant name
-        return {"answer": answer, "plant_name": plant_name}
+        logging.debug(f"Final stripped answer: {answer}")
+
+        return {
+            "answer": answer,
+            "plant_name": "Dummy Example"  # or logic if you also want to extract a plant name
+        }
 
     except Exception as e:
         logging.error(f"Error during analysis: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error during analysis.")
-
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error during analysis."
+        )
 
 def extract_plant_name(answer: str) -> str:
     """
@@ -207,33 +216,27 @@ def extract_plant_name(answer: str) -> str:
     ]
     answer_lower = answer.lower()
 
-    # Attempt to extract by scanning keywords
     detected_plant = None
     for keyword in plant_keywords:
         if keyword in answer_lower:
-            # Return the keyword in title case (e.g., "Aloe Vera")
-            # or refine if you want a specific capitalization
             detected_plant = keyword.title()
             break
 
-    # If we found a keyword, let's see if it's recognized in check_plant_name
     if detected_plant:
         is_known, final_plant = check_plant_name(detected_plant)
         if is_known:
-            return final_plant  # returns the properly capitalized version
+            return final_plant
         else:
-            logging.warning(f"Detected {detected_plant} but not in known_plants list.")
+            logging.warning(f"Detected {detected_plant} but not in known_plants.")
             return "Unknown Plant"
 
-    # If no keyword match, fallback to the entire answer to see if it's recognized
+    # Fallback: see if the entire answer is recognized
     is_known, final_plant = check_plant_name(answer.strip())
     if is_known:
         return final_plant
 
-    # If still not recognized, return a truncated or full answer for debugging
     logging.warning(f"No known plant keyword found in: {answer}")
-    return answer.strip()  # Or: "Unknown Plant"
-
+    return answer.strip()
 
 # Run the app (for development / debugging only)
 if __name__ == "__main__":
