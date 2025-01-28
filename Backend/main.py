@@ -16,6 +16,7 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
 )
+
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -48,11 +49,10 @@ def read_root():
     Root endpoint to test if the API is running.
     """
     return {"message": "Welcome to the SnapGarden API!"}
-
 @app.post("/analyze")
 async def analyze_image_or_question(
     file: Optional[UploadFile] = File(None), 
-    question: str = Form(...),
+    question: str = Form("What plant is this? Provide only the plant name."),
 ):
     """
     Accepts an image and/or a question, analyzes them, and returns an answer.
@@ -93,7 +93,7 @@ async def analyze_image_or_question(
         # Debug: Print the decoded answer
         logging.debug(f"Decoded answer: {answer}")
 
-        # Extract plant name (improved logic)
+        # Extract plant name
         plant_name = extract_plant_name(answer)
         if not plant_name:
             plant_name = "Unknown Plant"  # Default to "Unknown" if no plant name detected
@@ -104,19 +104,23 @@ async def analyze_image_or_question(
     except Exception as e:
         logging.error(f"Error during analysis: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error during analysis.")
-
+    
 def extract_plant_name(answer: str) -> str:
     """
     Extracts the plant name from the model's answer.
-    This is a placeholder function and can be improved based on the model's output format.
     """
     # Example: If the answer is "This is a rose plant.", extract "rose"
-    # You can replace this with a more sophisticated method (e.g., NER, keyword matching)
-    keywords = ["rose", "tulip", "sunflower", "oak", "maple"]  # Add more plant names
-    for keyword in keywords:
-        if keyword in answer.lower():
+    # Split the answer into words and look for plant-related keywords
+    plant_keywords = ["rose", "tulip", "sunflower", "oak", "maple", "aloe vera", "cactus", "fern"]  # Add more plant names
+    answer_lower = answer.lower()
+
+    # Look for plant keywords in the answer
+    for keyword in plant_keywords:
+        if keyword in answer_lower:
             return keyword.capitalize()
-    return ""
+
+    # If no keyword is found, return the first few words of the answer
+    return answer.split(" ")[0].capitalize() if answer else "Unknown Plant"
 
 # Run the app (for development)
 if __name__ == "__main__":

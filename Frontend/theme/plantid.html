@@ -214,8 +214,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      async function analyzePhoto(input) {
+        async function analyzePhoto(input) {
             const file = input.files[0]; // Get the uploaded file
 
             if (!file) {
@@ -229,10 +230,15 @@
                 return;
             }
 
+            // Show loading state (optional)
+            const modal = new bootstrap.Modal(document.getElementById('inventoryModal'));
+            document.getElementById("plantMessage").innerText = "Analyzing the image...";
+            modal.show();
+
             // Prepare the form data
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("question", "What plant is this?"); // Customize your question here
+            formData.append("question", "What plant is this? Give me just the name"); // Customize your question here
 
             try {
                 // Call the backend API
@@ -253,21 +259,23 @@
                     // Show modal with the plant name
                     document.getElementById("plantMessage").innerText = `A ${plantName} was recognized. Do you want to add it to your inventory?`;
                     // Show the modal
-                    $('#inventoryModal').modal('show');
+                    modal.show();
 
                     // Optionally, handle "Add to Inventory" button click
                     document.getElementById("addToInventoryBtn").onclick = function() {
                         // You can add the code here to save the plant to the user's inventory
                         console.log(`Added ${plantName} to inventory`);
                         alert(`${plantName} has been added to your inventory!`);
-                        $('#inventoryModal').modal('hide');
+                        modal.hide();
                     };
                 } else {
                     alert("Unable to recognize the plant. Please try again.");
+                    modal.hide();
                 }
             } catch (error) {
                 console.error("Error during API call:", error);
                 alert("Something went wrong. Please try again.");
+                modal.hide();
             }
         }
     </script>
