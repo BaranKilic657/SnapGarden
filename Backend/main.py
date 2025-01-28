@@ -121,7 +121,7 @@ async def analyze_image_or_question(
             logging.debug("Opened user-uploaded image successfully.")
         else:
             # No file uploaded, so load the dummy image
-            dummy_path = "dummy.png"  # Ensure this file exists in your project
+            dummy_path = "dummy.png"
             if not os.path.isfile(dummy_path):
                 raise HTTPException(
                     status_code=500,
@@ -160,7 +160,7 @@ async def analyze_image_or_question(
 
         return {
             "answer": answer,
-            "plant_name": "Dummy Example"  # or logic if you also want to extract a plant name
+            "plant_name": "Dummy Example" 
         }
 
     except Exception as e:
