@@ -52,7 +52,7 @@ def read_root():
 @app.post("/analyze")
 async def analyze_image_or_question(
     file: Optional[UploadFile] = File(None), 
-    question: str = Form("What plant is this? Provide only the plant name."),
+    question: str = Form("Identify the plant in the image. Use only the plant name in your response."),
 ):
     """
     Accepts an image and/or a question, analyzes them, and returns an answer.
@@ -111,7 +111,7 @@ def extract_plant_name(answer: str) -> str:
     """
     # Example: If the answer is "This is a rose plant.", extract "rose"
     # Split the answer into words and look for plant-related keywords
-    plant_keywords = ["rose", "tulip", "sunflower", "oak", "maple", "aloe vera", "cactus", "fern"]  # Add more plant names
+    plant_keywords = ["rose", "tulip", "sunflower", "oak", "maple", "aloe vera", "cactus", "fern", "aloe"]  # Add more plant names
     answer_lower = answer.lower()
 
     # Look for plant keywords in the answer
