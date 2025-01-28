@@ -52,6 +52,7 @@ async def analyze_image_or_question(
     if file:
         # If an image is uploaded, process the image along with the question
         image = Image.open(file.file).convert("RGB")
+
         inputs = processor(image, question, return_tensors="pt").to(device, dtype=dtype)
     else:
         # If no image is uploaded, only process the question
