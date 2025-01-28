@@ -54,10 +54,10 @@ async def analyze_image_or_question(
     if file:
         # Process the uploaded image
         image = Image.open(file.file).convert("RGB")
-        inputs = processor(image, question, return_tensors="pt").to("cuda", torch.float16)
+        inputs = processor(image, question, return_tensors="pt").to(device, dtype)
     else:
         # Process only the question
-        inputs = processor(question, return_tensors="pt").to("cuda", torch.float16)
+        inputs = processor(question, return_tensors="pt").to(device, dtype)
 
     # Generate model output
     output = model.generate(**inputs)
