@@ -50,48 +50,27 @@ async def analyze_image_or_question(
     Accepts an image and/or a question, analyzes them, and returns an answer.
     """
     if file:
-        # Process the uploaded image
+        # If an image is uploaded, process the image along with the question
         image = Image.open(file.file).convert("RGB")
-        inputs = processor(image, question, return_tensors="pt").to("cuda", torch.float16)
+        inputs = processor(image, question, return_tensors="pt").to(device, dtype=dtype)
     else:
-        # Process only the question
-        inputs = processor(question, return_tensors="pt").to("cuda", torch.float16)
+        # If no image is uploaded, only process the question
+        inputs = processor(question, return_tensors="pt").to(device, dtype=dtype)
 
     # Generate model output
     output = model.generate(**inputs)
-    float_dtype = torch.float16 if device == "cuda" else torch.float32
-    
-    complete_question = f"Question: {question} Answer:"
-
-    # Process the question and image through the model
-    inputs = processor(image, complete_question, return_tensors="pt").to(device=device, dtype=float_dtype)
-    
-    # Debug: Print the inputs
-    logging.debug(f"Inputs: {inputs}")
-
-    out = model.generate(
-        **inputs,
-        max_new_tokens=80,  # Extend from default 30 to ~100 words
-        num_beams=5,         # Better than greedy search
-        repetition_penalty=5.0,  # Reduce redundancy
-        temperature=0.4,     # Balance creativity/factuality
-        early_stopping=True
-    )
 
     # Debug: Print the raw output
-    logging.debug(f"Raw output: {out}")
+    logging.debug(f"Raw output: {output}")
 
     # Decode the output
-    answer = processor.decode(out[0], skip_special_tokens=True).strip()
+    answer = processor.decode(output[0], skip_special_tokens=True).strip()
 
     # Debug: Print the decoded answer
     logging.debug(f"Decoded answer: {answer}")
 
-    # If the answer looks like a plant name, clean the response (this depends on your model's output)
-    # Let's assume the model's answer will contain something like "Rose" or "Sunflower"
-    # You might need to adjust this depending on your model's format.
-
-    plant_name = answer.split(' ')[0]  # Assuming the plant name is the first word (simple approach)
+    # Assuming the model's answer is a plant name at the beginning (could be adjusted depending on model output)
+    plant_name = answer.split(' ')[0]  # Simple approach: assume first word is the plant name
     if not plant_name:
         plant_name = "Unknown Plant"  # Default to "Unknown" if no plant name detected
 
