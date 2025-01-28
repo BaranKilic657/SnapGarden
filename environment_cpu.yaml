@@ -4,22 +4,40 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.10
-  # Core packages via conda
-  - pytorch=2.0.1=cpu_py310h*  # Explicit CPU build
-  - torchvision=0.15.2=cpu_py310h*
-  # ML ecosystem
-  - transformers=4.34.0
-  - peft=0.6.2
-  - datasets=2.14.5
-  # Web server
-  - fastapi=0.103.2
-  - uvicorn=0.23.2
-  # System utilities
-  - pip=23.3.1
-  - numpy=1.24.3
-  # Pure Python packages via pip
+  - python=3.10.15
+
+  # Required for compatibility
+  - pip
+
+  # Pip-only packages
   - pip:
-      - torchaudio==2.0.2+cpu
-      - accelerate==0.24.1  # Required for PEFT
-      - bitsandbytes==0.41.3.1  # CPU-compatible version
+      - packaging==23.2
+      - addict==2.4.0
+      - editdistance==0.6.2
+      - einops==0.7.0
+      - fairscale==0.4.0
+      - jsonlines==4.0.0
+      - markdown2==2.4.10
+      - matplotlib==3.7.4
+      - more_itertools==10.1.0
+      - nltk==3.8.1
+      - numpy==1.24.4
+      - opencv_python_headless==4.5.5.64
+      - openpyxl==3.1.2
+      - Pillow==10.1.0
+      - sacrebleu==2.3.2
+      - seaborn==0.13.0
+      - shortuuid==1.0.11
+      - timm==0.9.10
+      - torch==2.1.2
+      - torchvision==0.16.2
+      - tqdm==4.66.1
+      - protobuf==4.25.0
+      - transformers==4.40.0
+      - typing_extensions==4.8.0
+      - uvicorn==0.24.0.post1
+      - sentencepiece==0.1.99
+      - accelerate==0.30.1
+      - socksio==1.0.0
+      - gradio==4.41.0
+      - gradio_client
