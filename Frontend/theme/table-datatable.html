@@ -4,20 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SnapGarden - Dashboard</title>
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <!-- Custom Stylesheet -->
     <link href="css/style2.css" rel="stylesheet">
-
 </head>
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -25,19 +19,8 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
 
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
-
-        <!--**********************************
-            Nav header start
-        ***********************************-->
         <div class="nav-header" style="background-color: whitesmoke;">
             <div class="brand-logo">
                 <a href="dashboard.html">
@@ -49,16 +32,9 @@
                 </a>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
 
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header" style="background-color: beige;">
             <div class="header-content clearfix">
-                
                 <div class="nav-control">
                     <div class="hamburger">
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
@@ -68,7 +44,7 @@
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <img src="images/user/1.png" height="40" width="40" alt="">
                             </div>
@@ -84,11 +60,8 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
 
-        <div class="nk-sidebar">           
+        <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Dashboard</li>
@@ -129,118 +102,157 @@
             </div>
         </div>
 
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapGarden Data Table</title>
-</head>
-<body>
-    <div class="content-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Your Plant Data 🌱</h4>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered zero-configuration">
-                                    <thead>
-                                        <tr>
-                                            <th>Plant Name</th>
-                                            <th>Room</th>
-                                            <th>Health Status</th>
-                                            <th>Last Watered</th>
-                                            <th>Next Watering</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Monstera</td>
-                                            <td>Living Room</td>
-                                            <td>Healthy</td>
-                                            <td>2 days ago</td>
-                                            <td>In 3 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiddle Leaf Fig</td>
-                                            <td>Bedroom</td>
-                                            <td>Needs Attention</td>
-                                            <td>5 days ago</td>
-                                            <td>Today</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Snake Plant</td>
-                                            <td>Office</td>
-                                            <td>Healthy</td>
-                                            <td>1 week ago</td>
-                                            <td>In 2 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Peace Lily</td>
-                                            <td>Kitchen</td>
-                                            <td>Thriving</td>
-                                            <td>1 day ago</td>
-                                            <td>In 4 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Succulent</td>
-                                            <td>Bathroom</td>
-                                            <td>Healthy</td>
-                                            <td>3 days ago</td>
-                                            <td>In 5 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Spider Plant</td>
-                                            <td>Living Room</td>
-                                            <td>Needs Pruning</td>
-                                            <td>4 days ago</td>
-                                            <td>Tomorrow</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Plant Name</th>
-                                            <th>Room</th>
-                                            <th>Health Status</th>
-                                            <th>Last Watered</th>
-                                            <th>Next Watering</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Your Plant Data 🌱</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Plant Name</th>
+                                                <th>Room</th>
+                                                <th>Health Status</th>
+                                                <th>Last Watered</th>
+                                                <th>Next Watering</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="plant-1">
+                                                <td><input type="text" value="Monstera" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Living Room" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Healthy" class="form-control" readonly /></td>
+                                                <td><input type="text" value="2 days ago" class="form-control" readonly /></td>
+                                                <td><input type="text" value="In 3 days" class="form-control" readonly /></td>
+                                                <td><button class="btn btn-primary" onclick="toggleEdit(1)">Edit</button></td>
+                                            </tr>
+                                            <tr id="plant-2">
+                                                <td><input type="text" value="Fiddle Leaf Fig" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Bedroom" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Needs Attention" class="form-control" readonly /></td>
+                                                <td><input type="text" value="5 days ago" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Today" class="form-control" readonly /></td>
+                                                <td><button class="btn btn-primary" onclick="toggleEdit(2)">Edit</button></td>
+                                            </tr>
+                                            <tr id="plant-3">
+                                                <td><input type="text" value="Snake Plant" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Office" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Healthy" class="form-control" readonly /></td>
+                                                <td><input type="text" value="1 week ago" class="form-control" readonly /></td>
+                                                <td><input type="text" value="In 2 days" class="form-control" readonly /></td>
+                                                <td><button class="btn btn-primary" onclick="toggleEdit(3)">Edit</button></td>
+                                            </tr>
+                                            <tr id="plant-4">
+                                                <td><input type="text" value="Peace Lily" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Kitchen" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Thriving" class="form-control" readonly /></td>
+                                                <td><input type="text" value="1 day ago" class="form-control" readonly /></td>
+                                                <td><input type="text" value="In 4 days" class="form-control" readonly /></td>
+                                                <td><button class="btn btn-primary" onclick="toggleEdit(4)">Edit</button></td>
+                                            </tr>
+                                            <tr id="plant-5">
+                                                <td><input type="text" value="Succulent" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Bathroom" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Healthy" class="form-control" readonly /></td>
+                                                <td><input type="text" value="3 days ago" class="form-control" readonly /></td>
+                                                <td><input type="text" value="In 5 days" class="form-control" readonly /></td>
+                                                <td><button class="btn btn-primary" onclick="toggleEdit(5)">Edit</button></td>
+                                            </tr>
+                                            <tr id="plant-6">
+                                                <td><input type="text" value="Spider Plant" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Living Room" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Needs Pruning" class="form-control" readonly /></td>
+                                                <td><input type="text" value="4 days ago" class="form-control" readonly /></td>
+                                                <td><input type="text" value="Tomorrow" class="form-control" readonly /></td>
+                                                <td><button class="btn btn-primary" onclick="toggleEdit(6)">Edit</button></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Plant Name</th>
+                                                <th>Room</th>
+                                                <th>Health Status</th>
+                                                <th>Last Watered</th>
+                                                <th>Next Watering</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- #/ container -->
-        <!--**********************************
-            Content body end
-        ***********************************-->
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
+    </div>
+
     <script src="plugins/common/common.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
-
     <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
+    <script>
+        function toggleEdit(plantId) {
+            // Toggle the input fields between editable and read-only
+            let inputs = document.querySelectorAll(`#plant-${plantId} input`);
+            let button = document.querySelector(`#plant-${plantId} button`);
+
+            if (inputs[0].readOnly) {
+                // Make inputs editable
+                inputs.forEach(input => input.readOnly = false);
+                button.textContent = "Save";
+            } else {
+                // Make inputs read-only and save data
+                inputs.forEach(input => input.readOnly = true);
+                button.textContent = "Edit";
+
+                // Save the plant data (you can implement your backend save logic here)
+                savePlant(plantId);
+            }
+        }
+
+        function savePlant(plantId) {
+            // Retrieve the data from the input fields
+            let plantName = document.querySelector(`#plant-${plantId} .form-control:nth-child(1)`).value;
+            let room = document.querySelector(`#plant-${plantId} .form-control:nth-child(2)`).value;
+            let healthStatus = document.querySelector(`#plant-${plantId} .form-control:nth-child(3)`).value;
+            let lastWatered = document.querySelector(`#plant-${plantId} .form-control:nth-child(4)`).value;
+            let nextWatering = document.querySelector(`#plant-${plantId} .form-control:nth-child(5)`).value;
+
+            // Example of sending data to the backend (modify based on your actual backend)
+            fetch(`/update_plant/${plantId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    plant_name: plantName,
+                    room: room,
+                    health_status: healthStatus,
+                    last_watered: lastWatered,
+                    next_watering: nextWatering
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Plant details saved successfully!");
+            })
+            .catch(error => {
+                console.error("Error updating plant:", error);
+            });
+        }
+    </script>
+t
 </body>
 
 </html>
