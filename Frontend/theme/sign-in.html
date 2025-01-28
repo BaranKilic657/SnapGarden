@@ -46,14 +46,14 @@
 						<div class="title-text">
 							<h3>Sign in to To Your Account</h3>
 						</div>
-						<form id="signin-form">
-							<!-- Email -->
-							<input class="form-control main" type="email" id="email" placeholder="Email Address" required>
+						<form id="signinForm">
+							<!-- Username -->
+							<input class="form-control main" id="signinUsername" type="text" placeholder="Email Address" required>
 							<!-- Password -->
-							<input class="form-control main" type="password" id="password" placeholder="Password" required>
+							<input class="form-control main" id="signinPassword" type="password" placeholder="Password" required>
 							<!-- Submit Button -->
 							<button type="submit" class="btn btn-main-md">Sign In</button>
-						</form>
+						  </form>
 						<div class="new-acount">
 							<a href="contact.html">Forgot your password?</a>
 							<p>Don't Have an account? <a href="sign-up.html"> SIGN UP</a></p>
@@ -79,42 +79,41 @@
   <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
   <script src="plugins/aos/aos.js"></script> 
   <script src="js/script.js"></script>
+</body>
 
-  <!-- Custom Script to handle form submission -->
 <script>
-	document.getElementById('signin-form').addEventListener('submit', function(event) {
-		event.preventDefault();  // Prevent the default form submission
-	
-		const email = document.getElementById('email').value;
-		const password = document.getElementById('password').value;
-	
-		const data = {
-			email: email,
+	document.getElementById('signinForm').addEventListener('submit', function(event) {
+		event.preventDefault();
+		
+		const username = document.getElementById('signinUsername').value;
+		const password = document.getElementById('signinPassword').value;
+		
+		const userData = {
+			username: username,
 			password: password
 		};
 	
-		// Send data to sign-in handler script using fetch
-		fetch('/Users/hayri/SnapGarden1/SnapGarden/Backend/sign-in-handler.py', {
+		// Send the user data to the sign-in handler
+		fetch('http://localhost:8080/signin', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(data),
+			body: JSON.stringify(userData)
 		})
 		.then(response => response.json())
-		.then(responseData => {
-			alert(responseData.message);
-			if (responseData.status === 'success') {
-				window.location.href = 'dashboard.html';  // Redirect to dashboard after successful login
+		.then(data => {
+			if (data.status === 'success') {
+				alert('Login successful!');
+				window.location.href = 'dashboard.html'; // Redirect to dashboard
+			} else {
+				alert('Error: ' + data.message);
 			}
 		})
 		.catch(error => {
-			console.error('Error:', error);
-			alert('An error occurred. Please try again.');
+			alert('Error: ' + error.message);
 		});
 	});
 	</script>
-
-</body>
 
 </html>

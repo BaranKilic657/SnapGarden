@@ -1,39 +1,53 @@
 import json
 from argon2 import PasswordHasher
+import os
 
 # Initialize the password hasher
 ph = PasswordHasher()
 
-# Handle the incoming POST request
 def handle_signin(data):
-    # Load the users from the JSON file
+    """
+    Handles the sign-in process.
+    - Verifies the username and password using Argon2.
+    """
     try:
+        # Check if users.json exists, or create a new file if it doesn't
+        if not os.path.exists('users.json'):
+            return {'status': 'error', 'message': 'No users found, please sign up first.'}
+
+        # Load users from users.json
         with open('users.json', 'r') as file:
-            users = json.load(file)
-    except FileNotFoundError:
-        return {'status': 'error', 'message': 'No users found'}
-
-    # Check if the email exists in the users
-    for user in users:
-        if user['email'] == data['email']:
             try:
-                # Verify the password using Argon2
-                ph.verify(user['password'], data['password'])
-                return {'status': 'success', 'message': 'Sign in successful'}
-            except Exception:
-                return {'status': 'error', 'message': 'Invalid password'}
+                users = json.load(file)
+            except json.JSONDecodeError:
+                return {'status': 'error', 'message': 'Users data is corrupted.'}
 
-    return {'status': 'error', 'message': 'Email not found'}
+        # Extract the login details
+        username = data['username']
+        password = data['password']
 
+        # Find the user by username
+        user = next((user for user in users if user['username'] == username), None)
+
+        # If the user is not found, return an error
+        if user is None:
+            return {'status': 'error', 'message': 'Invalid username or password'}
+
+        # Verify the password using Argon2
+        try:
+            ph.verify(user['password'], password)  # This will raise an exception if passwords don't match
+            return {'status': 'success', 'message': 'Login successful'}
+        except Exception:
+            return {'status': 'error', 'message': 'Invalid username or password'}
+
+    except Exception as e:
+        return {'status': 'error', 'message': str(e)}
+
+# For testing purposes, to simulate a sign-in request
 if __name__ == "__main__":
-    import sys
-    import json
-
-    # Read the data from stdin (which will be sent from the form)
-    data = json.loads(sys.stdin.read())
-
+    data = {
+        'username': 'testuser',
+        'password': 'password123'
+    }
     response = handle_signin(data)
-
-    # Output the response as JSON
-    print(f"Content-Type: application/json\n")
-    print(json.dumps(response))
+    print(response)

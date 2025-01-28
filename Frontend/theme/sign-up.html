@@ -50,16 +50,17 @@
 						<div class="title-text">
 							<h3>Sign Up for New Account</h3>
 						</div>
-						<form id="signup-form">
+						<div id="formMessage" style="margin-top: 10px; font-weight: bold;"></div>
+						<form id="signupForm">
 							<!-- Username -->
-							<input class="form-control main" type="text" id="username" placeholder="Your Name" required>
+							<input class="form-control main" id="username" type="text" placeholder="Your Name" required>
 							<!-- Email -->
-							<input class="form-control main" type="email" id="email" placeholder="Email Address" required>
+							<input class="form-control main" id="email" type="email" placeholder="Email Address" required>
 							<!-- Password -->
-							<input class="form-control main" type="password" id="password" placeholder="Password" required>
+							<input class="form-control main" id="password" type="password" placeholder="Password" required>
 							<!-- Submit Button -->
 							<button type="submit" class="btn btn-main-md">Sign Up</button>
-						</form>
+						  </form>
 						<div class="new-acount">
 							<p>By clicking “Sign Up” I agree to Terms of Conditions.</p>
 							<p>Already have an account? <a href="sign-in.html">SIGN IN</a></p>
@@ -87,46 +88,61 @@
   <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
   <script src="plugins/aos/aos.js"></script>  
   <script src="js/script.js"></script>
-
-  <!-- Custom Script to handle form submission -->
-<script>
-	document.getElementById('signup-form').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent the default form submission
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    const data = {
-        username: username,
-        email: email,
-        password: password
-    };
-
-    // Send data to sign-up handler script using fetch
-    fetch('http://localhost:8080/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(responseData => {
-        alert(responseData.message); // Show response message
-        if (responseData.status === 'success') {
-            window.location.href = 'sign-in.html';  // Redirect to sign-in page
-        }
-    })
-    .catch(error => {
-        console.error('Fehler:', error);
-        alert('Es ist ein Fehler aufgetreten. Bitte versuche es später erneut.');
-    });
-});
-
-
-	</script>
-	
 </body>
+
+<script>
+	document.getElementById('signupForm').addEventListener('submit', function(event) {
+		event.preventDefault();
+		
+		// Collect form data
+		const username = document.getElementById('username').value;
+		const email = document.getElementById('email').value;
+		const password = document.getElementById('password').value;
+		
+		// Clear any previous messages
+		const messageDiv = document.getElementById('formMessage');
+		messageDiv.textContent = '';
+		messageDiv.style.color = ''; // Reset color
+
+		const userData = {
+			username: username,
+			email: email,
+			password: password
+		};
+	
+		// Send the user data to the sign-up handler
+		fetch('http://localhost:8080/signup', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(userData)
+		})
+		.then(response => {
+			// Ensure fetch only passes valid JSON
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			if (data.status === 'success') {
+				messageDiv.textContent = 'User created successfully!';
+				messageDiv.style.color = 'green';
+				setTimeout(() => {
+					window.location.href = 'sign-in.html'; // Redirect after success
+				}, 2000);
+			} else {
+				messageDiv.textContent = data.message; // Display error message
+				messageDiv.style.color = 'red';
+			}
+		})
+		.catch(error => {
+			messageDiv.textContent = 'Error: ' + error.message;
+			messageDiv.style.color = 'red';
+		});
+	});
+</script>
+
 
 </html>

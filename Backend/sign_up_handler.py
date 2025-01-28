@@ -1,28 +1,39 @@
 import json
 from argon2 import PasswordHasher
+import os
 
 # Initialize the password hasher
 ph = PasswordHasher()
 
-# Handle the incoming POST request
 def handle_signup(data):
+    """
+    Handles the sign-up process.
+    - Hashes the user's password using Argon2.
+    - Saves the username, email, and hashed password in a JSON file.
+    """
     try:
-        # Attempt to load the existing users from users.json
-        try:
+        # Check if users.json exists, or create a new file if it doesn't
+        if os.path.exists('users.json'):
             with open('users.json', 'r') as file:
-                users = json.load(file)
-            print("Loaded existing users.")
-        except FileNotFoundError:
-            # If the file doesn't exist, create an empty list
+                users = json.load(file)  # Load existing users
+        else:
             users = []
-            print("users.json not found, creating new list.")
 
-        # Get the new user's details
+        # Extract the user's details from the input data
         username = data['username']
         email = data['email']
         password = data['password']
 
-        # Hash the password
+        # Check for duplicate username or email
+        duplicate_username = any(user['username'] == username for user in users)
+        duplicate_email = any(user['email'] == email for user in users)
+
+        if duplicate_username:
+            return {'status': 'error', 'message': 'The username is already taken. Please choose a different username.'}
+        if duplicate_email:
+            return {'status': 'error', 'message': 'The email is already registered. Please use a different email address.'}
+
+        # Hash the user's password
         hashed_password = ph.hash(password)
 
         # Create a new user object
@@ -30,31 +41,22 @@ def handle_signup(data):
 
         # Add the new user to the list
         users.append(new_user)
-        print(f"New user: {new_user}")
 
-        # Save the updated user list back to users.json
-        try:
-            with open('users.json', 'w') as file:
-                json.dump(users, file, indent=4)
-            print("User data saved to users.json.")
-        except Exception as e:
-            print(f"Error saving user data: {e}")
-            return {'status': 'error', 'message': f'Error saving user data: {str(e)}'}
+        # Save the updated list of users back into users.json
+        with open('users.json', 'w') as file:
+            json.dump(users, file, indent=4)
 
         return {'status': 'success', 'message': 'User created successfully'}
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return {'status': 'error', 'message': f"An error occurred: {str(e)}"}
 
-if __name__ == "__main__":
-    import sys
-    # Read the data from stdin (which will be sent from the form)
-    try:
-        data = json.loads(sys.stdin.read())
-        response = handle_signup(data)
-        print(f"Content-Type: application/json\n")
-        print(json.dumps(response))
     except Exception as e:
-        print(f"Error processing request: {e}")
-        print(f"Content-Type: application/json\n")
-        print(json.dumps({'status': 'error', 'message': 'Error processing request'}))
+        return {'status': 'error', 'message': str(e)}
+
+# For testing purposes, to simulate a sign-up request
+if __name__ == "__main__":
+    data = {
+        'username': 'testuser',
+        'email': 'test@example.com',
+        'password': 'password123'
+    }
+    response = handle_signup(data)
+    print(response)

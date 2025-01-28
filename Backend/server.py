@@ -1,61 +1,84 @@
+# server.py
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-import sys
 from sign_up_handler import handle_signup
-
-def handle_request():
-    try:
-        content = sys.stdin.read()
-        print("Received data:", content)  # Log the raw request body
-        data = json.loads(content)
-        response = handle_signup(data)
-    except Exception as e:
-        print(f"Error processing request: {e}")
-        response = {'status': 'error', 'message': str(e)}
-
-    # Send the response back to the client
-    print("Content-Type: application/json\n")
-    print(json.dumps(response))
+from sign_in_handler import handle_signin
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        """Override log_message to include detailed logs"""
+        print(f"{self.client_address[0]} - [{self.log_date_time_string()}] {format % args}")
+
     def do_OPTIONS(self):
-        # CORS Header für OPTIONS-Anfragen setzen
+        """Handle preflight CORS requests"""
+        self.log_message("OPTIONS request received")
         self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')  # Alle Domains erlauben
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')  # Erlaubte Methoden
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')  # Erlaubte Header
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
     def do_POST(self):
+        """Handle POST requests for /signup and /signin"""
+        self.send_header('Access-Control-Allow-Origin', '*')  # CORS header for POST responses
+        self.log_message(f"POST request received for path: {self.path}")
         if self.path == "/signup":
-            # Lese die eingehende JSON-Daten
-            content_length = int(self.headers['Content-Length'])
-            post_data = self.rfile.read(content_length)
-
-            # Versuche, die JSON-Daten zu laden
-            try:
-                data = json.loads(post_data)
-                response = handle_signup(data)
-                self.send_response(200)
-                self.send_header('Content-type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps(response).encode())
-            except json.JSONDecodeError:
-                self.send_response(400)
-                self.send_header('Content-type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({'status': 'error', 'message': 'Invalid JSON'}).encode())
+            self._handle_request(handle_signup)
+        elif self.path == "/signin":
+            self._handle_request(handle_signin)
         else:
+            self.log_message(f"Invalid path: {self.path}")
             self.send_response(404)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps({'status': 'error', 'message': 'Not found'}).encode())
+            response = {'status': 'error', 'message': 'Not Found'}
+            self.log_message(f"Response: {response}")
+            self.wfile.write(json.dumps(response).encode())
+
+    def _handle_request(self, handler_function):
+        """Common logic for handling POST requests"""
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            self.log_message(f"Request Data: {post_data.decode('utf-8')}")
+
+            data = json.loads(post_data)
+            self.log_message(f"Parsed JSON Data: {data}")
+
+            response = handler_function(data)
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+
+            self.log_message(f"Response: {response}")
+            self.wfile.write(json.dumps(response).encode())
+        except json.JSONDecodeError as e:
+            self.log_message(f"JSON Decode Error: {e}")
+            self.send_response(400)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            error_response = {'status': 'error', 'message': 'Invalid JSON format'}
+            self.log_message(f"Response: {error_response}")
+            self.wfile.write(json.dumps(error_response).encode())
+        except Exception as e:
+            self.log_message(f"Unexpected Error: {e}")
+            self.send_response(500)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            error_response = {'status': 'error', 'message': str(e)}
+            self.log_message(f"Response: {error_response}")
+            self.wfile.write(json.dumps(error_response).encode())
 
 def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8080):
+    """Start the HTTP server"""
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f'Starting server on http://localhost:{port}')
-    httpd.serve_forever()
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\nShutting down server.")
+        httpd.server_close()
 
 if __name__ == "__main__":
     run()
