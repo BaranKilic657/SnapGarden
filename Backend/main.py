@@ -50,7 +50,7 @@ def check_plant_name(plant_name: str):
     Quick verification if recognized name is in the known plant list.
     Return (True, plant_name) if recognized, else (False, 'Unknown Plant').
     """
-    plant_keywords = [
+    known_plants = [
         "aloe",
         "aloe vera",
         "basil",
