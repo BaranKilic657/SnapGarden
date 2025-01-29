@@ -54,6 +54,7 @@
 							<!-- Submit Button -->
 							<button type="submit" class="btn btn-main-md">Sign In</button>
 						</form>
+						<div id="formMessage"></div>
 						<div class="new-acount">
 							<a href="contact.html">Forgot your password?</a>
 							<p>Don't Have an account? <a href="sign-up.html"> SIGN UP</a></p>
@@ -85,14 +86,21 @@
 	document.getElementById('signinForm').addEventListener('submit', function(event) {
 		event.preventDefault();
 		
-		const email = document.getElementById('signinEmail').value;
-		const password = document.getElementById('signinPassword').value;
+		const email = document.getElementById('signinEmail');
+		const password = document.getElementById('signinPassword');
 		
 		const userData = {
-			email: email,
-			password: password
+			email: email.value,
+			password: password.value
 		};
-	
+
+		// Clear any previous error messages
+		email.style.borderColor = ''; 
+		password.style.borderColor = '';
+		const errorMessage = document.getElementById('formMessage');
+		errorMessage.textContent = '';
+		errorMessage.style.color = ''; // Reset color
+
 		// Send the user data to the sign-in handler
 		fetch('http://localhost:8080/signin', {
 			method: 'POST',
@@ -107,13 +115,20 @@
 				alert('Login successful!');
 				window.location.href = 'dashboard.html'; // Redirect to dashboard
 			} else {
-				alert('Error: ' + data.message);
+				// Display error in the input boxes
+				errorMessage.textContent = data.message; 
+				errorMessage.style.color = 'red';
+
+				// Highlight the email and password fields with a red border
+				email.style.borderColor = 'red';
+				password.style.borderColor = 'red';
 			}
 		})
 		.catch(error => {
 			alert('Error: ' + error.message);
 		});
 	});
-	</script>
+</script>
+
 
 </html>
