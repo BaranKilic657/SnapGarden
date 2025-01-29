@@ -260,44 +260,59 @@
 
 </body>
 <script>
-    // Wait for document to be ready
     $(document).ready(function() {
-        // Handle checkbox change in to-do list
-        $('.water-plant-checkbox').on('change', function() {
-            const eventId = $(this).data('event-id');  // Get associated event ID
-            const isChecked = $(this).prop('checked');  // Get the checkbox state (checked or not)
+    // Handle checkbox change in to-do list
+    $('.water-plant-checkbox').on('change', function() {
+        const eventId = $(this).data('event-id');  // Get associated event ID
+        const isChecked = $(this).prop('checked');  // Get the checkbox state (checked or not)
 
-            // If the task is checked (i.e., completed)
-            if (isChecked) {
-                // Remove the corresponding event from the calendar
-                removeEventFromCalendar(eventId);
-            }
-        });
+        // Save the task state in localStorage
+        localStorage.setItem(eventId, isChecked ? 'checked' : 'unchecked');
 
-        // Function to remove event from calendar
-        function removeEventFromCalendar(eventId) {
-            const calendar = $('#calendar').fullCalendar('getCalendar');  // Get FullCalendar instance
-            const event = calendar.getEventById(eventId);  // Get event by its ID
-            
-            if (event) {
-                event.remove();  // Remove the event from the calendar
-            }
+        // If the task is checked (i.e., completed)
+        if (isChecked) {
+            // Remove the corresponding event from the calendar
+            removeEventFromCalendar(eventId);
         }
-
-        // Initialize calendar
-        $('#calendar').fullCalendar({
-            events: [
-                {
-                    id: 'event1',  // Event ID should match the one in to-do list
-                    title: 'Water - Monstera #1',
-                    start: '2025-01-29T09:00:00',  // Example event date
-                    color: '#28a745',  // Color of the event
-                },
-                // Other events...
-            ],
-            editable: true,
-        });
     });
+
+    // Function to remove event from calendar
+    function removeEventFromCalendar(eventId) {
+        const calendar = $('#calendar').fullCalendar('getCalendar');  // Get FullCalendar instance
+        const event = calendar.getEventById(eventId);  // Get event by its ID
+        
+        if (event) {
+            event.remove();  // Remove the event from the calendar
+        }
+    }
+
+    // Load task states from localStorage and update checkboxes
+    $('.water-plant-checkbox').each(function() {
+        const eventId = $(this).data('event-id');
+        const taskState = localStorage.getItem(eventId);
+        
+        if (taskState === 'checked') {
+            $(this).prop('checked', true);
+            removeEventFromCalendar(eventId);
+        } else {
+            $(this).prop('checked', false);
+        }
+    });
+
+    // Initialize calendar
+    $('#calendar').fullCalendar({
+        events: [
+            {
+                id: 'event1',  // Event ID should match the one in to-do list
+                title: 'Water - Monstera #1',
+                start: '2025-01-29T09:00:00',  // Example event date
+                color: '#28a745',  // Color of the event
+            },
+        ],
+        editable: true,
+    });
+});
+
 </script>
 
 
