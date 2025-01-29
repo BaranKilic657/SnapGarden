@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (replace "*" with your frontend URL in production)
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
@@ -53,6 +53,7 @@ def check_plant_name(plant_name: str):
     """
     known_plants = [
         "Aloe vera",
+        "Aloe",
         "Basil",
         "Boston fern",
         "Calathea",
@@ -61,7 +62,7 @@ def check_plant_name(plant_name: str):
         "Citrus Plant",
         "Dumb Cane (Dieffenbachia)",
         "Dragon Tree (Dracaena)",
-        "Elephant Plant",
+        "Elephant Ear",
         "Fern",
         "Flamingo Flower",
         "Maple",
@@ -118,7 +119,6 @@ async def analyze_image_or_question(
                 )
             # Attempt to open the uploaded image
             image = Image.open(file.file).convert("RGB")
-            image.resize((334,334), Image.Resampling.LANCZOS)
             logging.debug("Opened user-uploaded image successfully.")
         else:
             # No file uploaded, so load the dummy image
@@ -132,7 +132,6 @@ async def analyze_image_or_question(
             logging.debug("No file uploaded; using dummy image.")
             with open(dummy_path, "rb") as f:
                 image = Image.open(f).convert("RGB")
-                image.resize((334,334), Image.Resampling.LANCZOS)
 
         prompt = f"Question: {question} Answer:"
         logging.debug(f"Prompt sent to the model: {prompt}")
