@@ -132,6 +132,7 @@ async def analyze_image_or_question(
             logging.debug("No file uploaded; using dummy image.")
             with open(dummy_path, "rb") as f:
                 image = Image.open(f).convert("RGB")
+                image.resize((334,334), Image.Resampling.LANCZOS)
 
         prompt = f"Question: {question} Answer:"
         logging.debug(f"Prompt sent to the model: {prompt}")
