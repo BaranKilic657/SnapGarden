@@ -347,6 +347,42 @@
 
 </body>
 <script>
+    // Get the input field where users can type the new to-do item
+    const newToDoInput = document.querySelector('.tdl-new2');
+    const todoList = document.querySelector('.tdl-content2 ul');
+
+    // Listen for the "Enter" key press
+    newToDoInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter' && newToDoInput.value.trim() !== '') {
+            // Create a new to-do item
+            const newToDoText = newToDoInput.value.trim();
+            const newListItem = document.createElement('li');
+            
+            newListItem.innerHTML = `
+                <label>
+                    <input type="checkbox">
+                    <i></i>
+                    <span>${newToDoText}</span>
+                    <a href='#' class="ti-close"></a>
+                </label>
+            `;
+
+            // Append the new item to the list
+            todoList.appendChild(newListItem);
+
+            // Clear the input field after adding the item
+            newToDoInput.value = '';
+        }
+    });
+
+    // Optional: Add functionality to remove a to-do item when the "close" icon is clicked
+    todoList.addEventListener('click', function(event) {
+        if (event.target.classList.contains('ti-close')) {
+            event.target.closest('li').remove();  // Remove the clicked item
+        }
+    });
+    
+
     // Handle Edit and Select buttons
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function() {
