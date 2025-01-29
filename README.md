@@ -86,7 +86,7 @@ Once you've completed the installation, you can start using SnapGarden!
 
 - **AI/ML Models**: ******* for plant identification and health analysis.  
 - **Backend**: Built with Python.
-- **Frontend**: Built with JavaScript frameworks.  
+- **Frontend**: Built with JavaScript frameworks. Used Template: https://themefisher.com/products/quixlab-bootstrap
 
 ---
 
