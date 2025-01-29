@@ -242,3 +242,51 @@ def extract_plant_name(answer: str) -> str:
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+@app.post("/check_plant_name")
+async def check_plant_name(request: PlantNameRequest):
+    """
+    Check if the recognized plant name exists in the known plants list.
+    """
+    known_plants = [
+        "Aloe vera",
+        "Basil",
+        "Boston fern",
+        "Calathea",
+        "Cactus",
+        "Chili Plant",
+        "Citrus Plant",
+        "Dumb Cane (Dieffenbachia)",
+        "Dragon Tree (Dracaena)",
+        "Elephant Ear",
+        "Fern",
+        "Flamingo Flower",
+        "Maple",
+        "Mint",
+        "Monstera",
+        "Oak",
+        "Orchid",
+        "Parsley",
+        "Peace Lily",
+        "Philodendron",
+        "Pothos",
+        "Rosemary",
+        "Rose",
+        "Snake Plant (Sansevieria)",
+        "Spider Plant",
+        "Succulent",
+        "Sunflower",
+        "Tomato Plant",
+        "Tulip",
+        "Weeping Fig (Ficus Benjamina)",
+        "ZZ Plant (Zamioculcas Zamiifolia)"
+    ]
+    
+    # Check if the plant name is in the known plants list (case-insensitive)
+    plant_name = request.plant_name.strip().lower()
+    
+    for known_plant in known_plants:
+        if plant_name == known_plant.lower():
+            return {"plant_name": known_plant}
+    
+    return {"plant_name": "Unknown Plant"}

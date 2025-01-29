@@ -215,69 +215,117 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        async function analyzePhoto(input) {
-            const file = input.files[0]; // Get the uploaded file
+   <script>
+    async function analyzePhoto(input) {
+        const file = input.files[0]; // Get the uploaded file
 
-            if (!file) {
-                alert("Please upload a valid image.");
-                return;
+        if (!file) {
+            alert("Please upload a valid image.");
+            return;
+        }
+
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+            alert("Please upload a valid image file.");
+            return;
+        }
+
+        // Show loading state (optional)
+        const modal = new bootstrap.Modal(document.getElementById('inventoryModal'));
+        document.getElementById("plantMessage").innerText = "Analyzing the image...";
+        modal.show();
+
+        // Prepare the form data
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("question", "Identify the plant in the image. Return only the plant name.");
+
+        try {
+            // Call the backend API
+            const response = await fetch("http://127.0.0.1:8000/analyze", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`Error: ${response.statusText} - ${errorData.detail || errorData.message}`);
             }
 
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                alert("Please upload a valid image file.");
-                return;
-            }
+            const data = await response.json(); // Parse the response
+            const plantName = data.plant_name; // Use "plant_name" from the backend
 
-            // Show loading state (optional)
-            const modal = new bootstrap.Modal(document.getElementById('inventoryModal'));
-            document.getElementById("plantMessage").innerText = "Analyzing the image...";
-            modal.show();
-
-            // Prepare the form data
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("question", "Identify the plant in the image. Return only the plant name.");
-
-            try {
-                // Call the backend API
-                const response = await fetch("http://127.0.0.1:8000/analyze", {
+            if (plantName) {
+                // Check if the plant name is recognized by calling the backend
+                const nameCheckResponse = await fetch("http://127.0.0.1:8000/check_plant_name", {
                     method: "POST",
-                    body: formData,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ plant_name: plantName })
                 });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`Error: ${response.statusText} - ${errorData.detail || errorData.message}`);
-                }
+                if (nameCheckResponse.ok) {
+                    const nameCheckData = await nameCheckResponse.json();
+                    const recognizedPlantName = nameCheckData.plant_name;
 
-                const data = await response.json(); // Parse the response
-                const plantName = data.plant_name; // Use "plant_name" from the backend
-
-                if (plantName) {
                     // Show modal with the plant name
-                    document.getElementById("plantMessage").innerText = `A ${plantName} was recognized. Do you want to add it to your inventory?`;
+                    document.getElementById("plantMessage").innerText = `A ${recognizedPlantName} was recognized. Do you want to add it to your inventory?`;
+
                     // Show the modal
                     modal.show();
 
-                    // Optionally, handle "Add to Inventory" button click
+                    // Handle "Add to Inventory" button click
                     document.getElementById("addToInventoryBtn").onclick = function() {
-                        // You can add the code here to save the plant to the user's inventory
-                        console.log(`Added ${plantName} to inventory`);
-                        alert(`${plantName} has been added to your inventory!`);
+                        // Add the recognized plant to the dashboard table
+                        addPlantToTable(recognizedPlantName);
+                        alert(`${recognizedPlantName} has been added to your inventory!`);
                         modal.hide();
                     };
                 } else {
                     alert("Unable to recognize the plant. Please try again.");
                     modal.hide();
                 }
-            } catch (error) {
-                console.error("Error during API call:", error);
-                alert("Something went wrong. Please try again.");
+            } else {
+                alert("Unable to recognize the plant. Please try again.");
                 modal.hide();
             }
+        } catch (error) {
+            console.error("Error during API call:", error);
+            alert("Something went wrong. Please try again.");
+            modal.hide();
         }
-    </script>
+    }
+
+    // Function to add the recognized plant to the table
+    function addPlantToTable(plantName) {
+        // Example plant data (You can modify it to add more fields like room, health status, etc.)
+        const newPlant = {
+            name: plantName,
+            plantType: plantName, // This could be customized to show more info (like the genus or category)
+            room: 'Living Room',  // Example room
+            healthStatus: 'Healthy', // Default health status
+            lastWatered: '1 day ago'  // Example last watered info
+        };
+
+        // Add the plant to the dashboard table
+        const tableBody = document.querySelector('#plantTable tbody');
+        
+        // Create a new row
+        const newRow = document.createElement('tr');
+        
+        // Fill the row with the plant's data
+        newRow.innerHTML = `
+            <td><span class="editable" data-column="name">${newPlant.name}</span></td>
+            <td><span class="editable" data-column="plant">${newPlant.plantType}</span></td>
+            <td><span class="editable" data-column="room">${newPlant.room}</span></td>
+            <td><span class="editable" data-column="health">${newPlant.healthStatus}</span></td>
+            <td><span class="editable" data-column="lastWatered">${newPlant.lastWatered}</span></td>
+            <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
+        `;
+        
+        // Append the new row to the table
+        tableBody.appendChild(newRow);
+    }
+</script>
+
 </body>
 </html>
