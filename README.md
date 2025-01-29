@@ -109,7 +109,7 @@ Once you've completed the installation, you can start using SnapGarden!
 
 ## Technologies Used  
 
-- **AI/ML Models**: ******* for plant identification and health analysis.  
+- **AI/ML Models**: Salesforce/blip2-opt-2.7b for plant identification and health analysis.  
 - **Backend**: Built with Python.
 - **Frontend**: Built with JavaScript frameworks. Used Template: https://themefisher.com/products/quixlab-bootstrap
 

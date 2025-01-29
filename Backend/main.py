@@ -218,12 +218,30 @@ async def analyze_image_or_question(
             answer = answer.split("Answer:", 1)[1].strip()
 
         logging.debug(f"Final stripped answer: {answer}")
+        
+        def process_answer(prompt, answer):
+            if "Question: Is this plant healthy? Answer:" in prompt:
+                if ("Yes" in answer or "healthy" in answer) and not ("not" in answer and "unhealthy" in answer):
+                    return "The plant is healthy."
+                elif ("No" in answer or "unhealthy" in answer) and not ("not" in answer and "healthy" in answer):
+                    return "The plant is unhealthy."
+            return answer
+
+        # Example usage
+        prompt = "Question: Is this plant healthy? Answer:"
+        answer = "This is a healthy, well-balanced cactus"
+
+        processed_answer = process_answer(prompt, answer)
+        if processed_answer is None:
+            logging.error("Error during analysis: cannot unpack non-iterable NoneType object")
+        else:
+            logging.debug(f"Final stripped answer: {processed_answer}")
 
         # Extract the plant name from the answer
         plant_name = extract_plant_name(answer)
 
         return {
-            "answer": answer,
+            "answer": processed_answer,
             "plant_name": plant_name 
         }
 
