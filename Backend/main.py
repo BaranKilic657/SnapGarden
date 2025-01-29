@@ -61,7 +61,7 @@ def check_plant_name(plant_name: str):
         "Citrus Plant",
         "Dumb Cane (Dieffenbachia)",
         "Dragon Tree (Dracaena)",
-        "Elephant Ear",
+        "Elephant Plant",
         "Fern",
         "Flamingo Flower",
         "Maple",
@@ -118,6 +118,7 @@ async def analyze_image_or_question(
                 )
             # Attempt to open the uploaded image
             image = Image.open(file.file).convert("RGB")
+            image.resize((334,334), Image.Resampling.LANCZOS)
             logging.debug("Opened user-uploaded image successfully.")
         else:
             # No file uploaded, so load the dummy image

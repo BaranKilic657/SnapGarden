@@ -38,5 +38,15 @@
         "username": "Klemens",
         "email": "klemens@mustermann.de",
         "password": "$argon2id$v=19$m=65536,t=3,p=4$MjpB+q+Dux8q4geeYnmBLw$XFAdo4Re3hISCIpyl/EbeKiZWzxZBafT2AnP7I1rH14"
+    },
+    {
+        "username": "Hello123",
+        "email": "hello123@gmail.com",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$OA4FRKytjixnZEVPAyaBMQ$tCuMt59iqAohnUhpC6mm8ZvAlbo1ZbBmFYDhqqVHExY"
+    },
+    {
+        "username": "kenny",
+        "email": "kenny@kenny.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$5HY6sAICal8q9IrLqJ/Ylw$1QYWzkcYbsJVKNLxvGlzrDGxlqg6QaCjYMrHUFQSaL4"
     }
 ]
