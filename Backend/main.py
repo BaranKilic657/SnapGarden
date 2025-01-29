@@ -158,9 +158,11 @@ async def analyze_image_or_question(
 
         logging.debug(f"Final stripped answer: {answer}")
 
+        plant_name = extract_plant_name(answer)
+        
         return {
             "answer": answer,
-            "plant_name": "Dummy Example" 
+            "plant_name": plant_name 
         }
 
     except Exception as e:
