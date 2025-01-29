@@ -277,6 +277,36 @@
                 alert("Something went wrong. Please try again.");
                 modal.hide();
             }
+                    // Function to add the recognized plant to the table
+            function addPlantToTable(plantName) {
+                // Example plant data (You can modify it to add more fields like room, health status, etc.)
+                const newPlant = {
+                    name: plantName,
+                    plantType: plantName, // This could be customized to show more info (like the genus or category)
+                    room: 'Living Room',  // Example room
+                    healthStatus: 'Healthy', // Default health status
+                    lastWatered: '1 day ago'  // Example last watered info
+                };
+
+                // Add the plant to the dashboard table
+                const tableBody = document.querySelector('#plantTable tbody');
+                
+                // Create a new row
+                const newRow = document.createElement('tr');
+                
+                // Fill the row with the plant's data
+                newRow.innerHTML = `
+                    <td><span class="editable" data-column="name">${newPlant.name}</span></td>
+                    <td><span class="editable" data-column="plant">${newPlant.plantType}</span></td>
+                    <td><span class="editable" data-column="room">${newPlant.room}</span></td>
+                    <td><span class="editable" data-column="health">${newPlant.healthStatus}</span></td>
+                    <td><span class="editable" data-column="lastWatered">${newPlant.lastWatered}</span></td>
+                    <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
+                `;
+                
+                // Append the new row to the table
+                tableBody.appendChild(newRow);
+            }
         }
     </script>
 </body>

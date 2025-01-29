@@ -200,7 +200,7 @@
                 </div>
             </div>
             
-                
+            <!-- To-Do List -->
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12">
                     <div class="card">
@@ -210,20 +210,16 @@
                                     <div class="tdl-content2 tdl-content--no-label">
                                         <ul>
                                             <li>
-                                                <label><input type="checkbox"><i></i><span>Water - Monstera #1</span><a href='#' class="ti-close"></a>
-                                                </label>
+                                                <label><input type="checkbox"><i></i><span>Water - Monstera #1</span><a href='#' class="ti-close"></a></label>
                                             </li>
                                             <li>
-                                                <label><input type="checkbox" checked><i></i><span>Water - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
-                                                </label>
+                                                <label><input type="checkbox" checked><i></i><span>Water - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a></label>
                                             </li>
                                             <li>
-                                                <label><input type="checkbox"><i></i><span>Health Check - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a>
-                                                </label>
+                                                <label><input type="checkbox"><i></i><span>Health Check - Fiddle Leaf Fig - Corner Plant</span><a href='#' class="ti-close"></a></label>
                                             </li>
                                             <li>
-                                                <label><input type="checkbox" checked><i></i><span>Water - Snake Plant - Office Desk</span><a href='#' class="ti-close"></a>
-                                                </label>
+                                                <label><input type="checkbox" checked><i></i><span>Water - Snake Plant - Office Desk</span><a href='#' class="ti-close"></a></label>
                                             </li>
                                         </ul>
                                     </div>
@@ -235,13 +231,14 @@
                 </div>
             </div>
             
+            <!-- Editable Plant Table -->
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-10 col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="active-member">
                                 <div class="table-responsive">
-                                    <table class="table table-xs mb-0">
+                                    <table class="table table-xs mb-0" id="plantTable">
                                         <thead>
                                             <tr>
                                                 <th>Name/Description</th>
@@ -249,98 +246,56 @@
                                                 <th>Room</th>
                                                 <th>Health Status</th>
                                                 <th>Last Watered</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Monstera #1</td>
-                                                <td>Monstera</td>
-                                                <td><span>Living Room</span></td>
-                                                <td>
-                                                    <div>
-                                                        <div class="progress" style="height: 6px">
-                                                            <div class="progress-bar bg-success" style="width: 80%"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>2 days ago</span>
-                                                </td>
+                                                <td><span class="editable" data-column="name">Monstera #1</span></td>
+                                                <td><span class="editable" data-column="plant">Monstera</span></td>
+                                                <td><span class="editable" data-column="room">Living Room</span></td>
+                                                <td><span class="editable" data-column="health">Healthy</span></td>
+                                                <td><span class="editable" data-column="lastWatered">2 days ago</span></td>
+                                                <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
+                                            <tr>
+                                                <td><span class="editable" data-column="name">Fiddle Leaf Fig - Corner Plant</span></td>
+                                                <td><span class="editable" data-column="plant">Fiddle Leaf Fig</span></td>
+                                                <td><span class="editable" data-column="room">Bedroom</span></td>
+                                                <td><span class="editable" data-column="health">Moderate</span></td>
+                                                <td><span class="editable" data-column="lastWatered">5 days ago</span></td>
+                                                <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
                                             </tr>
                                             <tr>
-                                                <td>Fiddle Leaf Fig - Corner Plant</td>
-                                                <td>Fiddle Leaf Fig</td>
-                                                <td><span>Bedroom</span></td>
-                                                <td>
-                                                    <div>
-                                                        <div class="progress" style="height: 6px">
-                                                            <div class="progress-bar bg-warning" style="width: 60%"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>5 days ago</span>
-                                                </td>
+                                                <td><span class="editable" data-column="name">Snake Plant - Office Desk</span></td>
+                                                <td><span class="editable" data-column="plant">Snake Plant</span></td>
+                                                <td><span class="editable" data-column="room">Office</span></td>
+                                                <td><span class="editable" data-column="health">Unhealthy</span></td>
+                                                <td><span class="editable" data-column="lastWatered">1 week ago</span></td>
+                                                <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
                                             </tr>
                                             <tr>
-                                                <td>Snake Plant - Office Desk</td>
-                                                <td>Snake Plant</td>
-                                                <td><span>Office</span></td>
-                                                <td>
-                                                    <div>
-                                                        <div class="progress" style="height: 6px">
-                                                            <div class="progress-bar bg-danger" style="width: 40%"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>1 week ago</span>
-                                                </td>
+                                                <td><span class="editable" data-column="name">Peace Lily - Kitchen Counter</span></td>
+                                                <td><span class="editable" data-column="plant">Peace Lily</span></td>
+                                                <td><span class="editable" data-column="room">Kitchen</span></td>
+                                                <td><span class="editable" data-column="health">Healthy</span></td>
+                                                <td><span class="editable" data-column="lastWatered">1 day ago</span></td>
+                                                <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
                                             </tr>
                                             <tr>
-                                                <td>Peace Lily - Kitchen Counter</td>
-                                                <td>Peace Lily</td>
-                                                <td><span>Kitchen</span></td>
-                                                <td>
-                                                    <div>
-                                                        <div class="progress" style="height: 6px">
-                                                            <div class="progress-bar bg-success" style="width: 90%"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>1 day ago</span>
-                                                </td>
+                                                <td><span class="editable" data-column="name">Succulent - Bathroom Shelf</span></td>
+                                                <td><span class="editable" data-column="plant">Succulent</span></td>
+                                                <td><span class="editable" data-column="room">Bathroom</span></td>
+                                                <td><span class="editable" data-column="health">Healthy</span></td>
+                                                <td><span class="editable" data-column="lastWatered">3 days ago</span></td>
+                                                <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
                                             </tr>
                                             <tr>
-                                                <td>Succulent - Bathroom Shelf</td>
-                                                <td>Succulent</td>
-                                                <td><span>Bathroom</span></td>
-                                                <td>
-                                                    <div>
-                                                        <div class="progress" style="height: 6px">
-                                                            <div class="progress-bar bg-success" style="width: 75%"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>3 days ago</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Spider Plant - Hanging Basket</td>
-                                                <td>Spider Plant</td>
-                                                <td><span>Living Room</span></td>
-                                                <td>
-                                                    <div>
-                                                        <div class="progress" style="height: 6px">
-                                                            <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>4 days ago</span>
-                                                </td>
+                                                <td><span class="editable" data-column="name">Spider Plant - Hanging Basket</span></td>
+                                                <td><span class="editable" data-column="plant">Spider Plant</span></td>
+                                                <td><span class="editable" data-column="room">Living Room</span></td>
+                                                <td><span class="editable" data-column="health">Moderate</span></td>
+                                                <td><span class="editable" data-column="lastWatered">4 days ago</span></td>
+                                                <td><button class="edit-btn btn btn-success"><i class="fa fa-edit"></i> Edit</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -350,7 +305,7 @@
                     </div>                        
                 </div>
             </div>
-            
+        </div>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -389,6 +344,104 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+    <script>
+        // Get the input field where users can type the new to-do item
+        const newToDoInput = document.querySelector('.tdl-new2');
+        const todoList = document.querySelector('.tdl-content2 ul');
+    
+        // Listen for the "Enter" key press
+        newToDoInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && newToDoInput.value.trim() !== '') {
+                // Create a new to-do item
+                const newToDoText = newToDoInput.value.trim();
+                const newListItem = document.createElement('li');
+                
+                newListItem.innerHTML = `
+                    <label>
+                        <input type="checkbox">
+                        <i></i>
+                        <span>${newToDoText}</span>
+                        <a href='#' class="ti-close"></a>
+                    </label>
+                `;
+    
+                // Append the new item to the list
+                todoList.appendChild(newListItem);
+    
+                // Clear the input field after adding the item
+                newToDoInput.value = '';
+            }
+        });
+    
+        // Optional: Add functionality to remove a to-do item when the "close" icon is clicked
+        todoList.addEventListener('click', function(event) {
+            if (event.target.classList.contains('ti-close')) {
+                event.target.closest('li').remove();  // Remove the clicked item
+            }
+        });
+        
+    
+        // Handle Edit and Select buttons
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const isEditing = this.innerText === 'Save'; // Check if the row is in editing mode
+                
+                // Toggle the row to editable or save mode
+                if (isEditing) {
+                    saveRow(row);
+                    this.innerText = 'Edit';  // Change button text back to 'Edit'
+                } else {
+                    enableEditing(row);
+                    this.innerText = 'Save';  // Change button text to 'Save'
+                }
+            });
+        });
+    
+        // Enable editing mode for the row
+        function enableEditing(row) {
+            row.querySelectorAll('span.editable').forEach(cell => {
+                const currentText = cell.innerText;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = currentText;
+                cell.innerHTML = '';
+                cell.appendChild(input);
+            });
+        }
+    
+        // Save the edited row and revert back to the original view
+        function saveRow(row) {
+            row.querySelectorAll('span.editable').forEach(cell => {
+                const input = cell.querySelector('input');
+                if (input) {
+                    const updatedText = input.value;
+                    cell.innerHTML = updatedText;
+                    saveChanges(cell.getAttribute('data-column'), updatedText); // Save the updated value
+                }
+            });
+        }
+    
+        // Function to handle saving changes
+        function saveChanges(column, updatedText) {
+            console.log(`Column: ${column} | Updated Text: ${updatedText}`);
+            
+            // You can use an AJAX request to send the data to the backend
+            fetch('http://localhost:8000/update_plant', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    column: column,
+                    value: updatedText
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 
 </body>
 
