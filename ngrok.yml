@@ -1,0 +1,13 @@
+tunnels:
+    web8000:
+        addr: 8000
+        proto: http
+    web8001:
+        addr: 8001
+        proto: http
+    web8080:
+        addr: 8080
+        proto: http
+version: "3"
+agent:
+    connect_url: connect.us.ngrok-agent.com:443

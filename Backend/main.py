@@ -53,6 +53,7 @@ def check_plant_name(plant_name: str):
     """
     known_plants = [
         "Aloe vera",
+        "Aloe",
         "Basil",
         "Boston fern",
         "Calathea",

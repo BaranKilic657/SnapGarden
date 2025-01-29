@@ -70,6 +70,31 @@ conda env create -f environment_cpu.yaml
 conda activate SnapGarden_CPU
 ```
 
+## Startup
+
+Multiple terminals are required to run this project
+
+1. **Start the LLM Backend** 
+
+```bash
+cd Backend
+uvicorn main:app --reload
+```
+
+2. **Start the Authentication Backend**
+
+```bash
+cd Backend
+python server.py
+```
+
+3. **Start the Website Frontend**
+
+```bash
+cd Frontend
+python -m http.server 8001
+```
+
 ---
 
 ## Usage  
@@ -85,8 +110,8 @@ Once you've completed the installation, you can start using SnapGarden!
 ## Technologies Used  
 
 - **AI/ML Models**: ******* for plant identification and health analysis.  
-- **Backend**: 
-- **Frontend**: Built with JavaScript frameworks.  
+- **Backend**: Built with Python.
+- **Frontend**: Built with JavaScript frameworks. Used Template: https://themefisher.com/products/quixlab-bootstrap
 
 ---
 
