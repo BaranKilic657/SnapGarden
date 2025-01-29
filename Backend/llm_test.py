@@ -18,8 +18,9 @@ torch.set_num_threads(4)  # Adjust based on your CPU's core count
 torch.set_num_interop_threads(2)  # Adjust for inter-operation parallelism
 model = torch.compile(model, dynamic=False)
 
-image = Image.open("/home/baran/dataset_hub/dataset_converted/Cacti/1.jpg").convert("RGB")
-question = "Question: What soil should I use? Answer:"
+image = Image.open("path").convert("RGB")
+image.resize((334,334), Image.Resampling.LANCZOS)
+question = "Question: Is this plant healthy? Answer:"
 
 inputs = processor(image, question, return_tensors="pt").to(device=device, dtype=dtype)
 out = model.generate(**inputs,
