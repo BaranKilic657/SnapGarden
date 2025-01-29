@@ -101,7 +101,7 @@ def read_root():
 @app.post("/analyze")
 async def analyze_image_or_question(
     file: Optional[UploadFile] = File(None),
-    question: str = Form("Identify the plant in the image. Return only the plant name with no extra words.")
+    question: str = Form("Identify the plant in the image.")
 ):
     """
     Endpoint that either accepts an image for analysis or uses a dummy image
@@ -158,9 +158,12 @@ async def analyze_image_or_question(
 
         logging.debug(f"Final stripped answer: {answer}")
 
+        # Extract the plant name from the answer
+        plant_name = extract_plant_name(answer)
+
         return {
             "answer": answer,
-            "plant_name": "Dummy Example" 
+            "plant_name": plant_name 
         }
 
     except Exception as e:
