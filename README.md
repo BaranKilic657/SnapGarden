@@ -70,6 +70,31 @@ conda env create -f environment_cpu.yaml
 conda activate SnapGarden_CPU
 ```
 
+## Startup
+
+Multiple terminals are required to run this project
+
+1. **Start the LLM Backend** 
+
+```bash
+cd Backend
+uvicorn main:app --reload
+```
+
+2. **Start the Authentication Backend**
+
+```bash
+cd Backend
+python server.py
+```
+
+3. **Start the Website Frontend**
+
+```bash
+cd Frontend
+python -m http.server 8001
+```
+
 ---
 
 ## Usage  
