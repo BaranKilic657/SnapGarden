@@ -42,55 +42,113 @@ else:
         model_name, device_map="cpu", torch_dtype=dtype
     )
     # Adjust threads for CPU performance if desired
-    torch.set_num_threads(4)
-    torch.set_num_interop_threads(2)
+    torch.set_num_threads(8)
+    torch.set_num_interop_threads(4)
     model = torch.compile(model, dynamic=False)  # Optional: for PyTorch 2.x
 
-def check_plant_name(plant_name: str):
-    """
-    Quick verification if recognized name is in the known plant list.
-    Return (True, plant_name) if recognized, else (False, 'Unknown Plant').
-    """
-    known_plants = [
-        "Aloe vera",
-        "Aloe",
-        "Basil",
-        "Boston fern",
-        "Calathea",
-        "Cactus",
-        "Chili Plant",
-        "Citrus Plant",
-        "Dumb Cane (Dieffenbachia)",
-        "Dragon Tree (Dracaena)",
-        "Elephant Ear",
-        "Fern",
-        "Flamingo Flower",
-        "Maple",
-        "Mint",
-        "Monstera",
-        "Oak",
-        "Orchid",
-        "Parsley",
-        "Peace Lily",
-        "Philodendron",
-        "Pothos",
-        "Rosemary",
-        "Rose",
-        "Snake Plant (Sansevieria)",
-        "Spider Plant",
-        "Succulent",
-        "Sunflower",
-        "Tomato Plant",
-        "Tulip",
-        "Weeping Fig (Ficus Benjamina)",
-        "ZZ Plant (Zamioculcas Zamiifolia)"
-    ]
+# pip install rapidfuzz
+from rapidfuzz import process
 
-    # Simple containment check (case-insensitive)
-    for kp in known_plants:
-        if plant_name.lower() == kp.lower():
-            return (True, kp)
-    return (False, "Unknown Plant")
+known_plants = [
+    "Aloe vera",
+    "Aloe",
+    "Basil",
+    "Boston fern",
+    "Calathea",
+    "Cactus",
+    "Chili Plant",
+    "Citrus Plant",
+    "Dumb Cane",
+    "Dieffenbachia"
+    "Dragon Tree",
+    "Dracaena",
+    "Elephant Plant"
+    "Elephant Ear",
+    "Fern",
+    "Flamingo Flower",
+    "Maple",
+    "Mint",
+    "Monstera",
+    "Oak",
+    "Orchid",
+    "Parsley",
+    "Peace Lily",
+    "Philodendron",
+    "Pothos",
+    "Rosemary",
+    "Rose",
+    "Snake Plant",
+    "Sansevieria"
+    "Spider Plant",
+    "Succulent",
+    "Sunflower",
+    "Tomato Plant",
+    "Tulip",
+    "Weeping Fig",
+    "Ficus Benjamina",
+    "ZZ Plant",
+    "Zamioculcas Zamiifolia"
+]
+
+def check_plant_name(plant_name: str, threshold: int = 80):
+    """
+    Fuzzy-verify if recognized name is in the known plant list.
+    Return (True, best_match) if recognized with a confidence >= threshold,
+    else (False, 'Unknown Plant').
+    """
+    best_match, score, _ = process.extractOne(plant_name, known_plants, score_cutoff=threshold)
+    if best_match:
+        if plant_name in "Elephant Plant (Cactus)":  # Special case
+            return True, "Elephant Plant"
+        return True, best_match
+    else:
+        return False, "Unknown Plant"    
+
+# def check_plant_name(plant_name: str):
+#     """
+#     Quick verification if recognized name is in the known plant list.
+#     Return (True, plant_name) if recognized, else (False, 'Unknown Plant').
+#     """
+#     known_plants = [
+#         "Aloe vera",
+#         "Aloe",
+#         "Basil",
+#         "Boston fern",
+#         "Calathea",
+#         "Cactus",
+#         "Chili Plant",
+#         "Citrus Plant",
+#         "Dumb Cane (Dieffenbachia)",
+#         "Dragon Tree (Dracaena)",
+#         "Elephant Ear",
+#         "Fern",
+#         "Flamingo Flower",
+#         "Maple",
+#         "Mint",
+#         "Monstera",
+#         "Oak",
+#         "Orchid",
+#         "Parsley",
+#         "Peace Lily",
+#         "Philodendron",
+#         "Pothos",
+#         "Rosemary",
+#         "Rose",
+#         "Snake Plant (Sansevieria)",
+#         "Spider Plant",
+#         "Succulent",
+#         "Sunflower",
+#         "Tomato Plant",
+#         "Tulip",
+#         "Weeping Fig (Ficus Benjamina)",
+#         "ZZ Plant (Zamioculcas Zamiifolia)"
+#     ]
+
+#     # Simple containment check (case-insensitive)
+#     for kp in known_plants:
+#         if plant_name.lower() == kp.lower():
+#             return (True, kp)
+#     return (False, "Unknown Plant")
 
 @app.get("/")
 def read_root():

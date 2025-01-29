@@ -14,11 +14,11 @@ device = "cpu"
 dtype = torch.float32
 model = Blip2ForConditionalGeneration.from_pretrained(model_name, device_map="cpu", torch_dtype=dtype)
 
-torch.set_num_threads(4)  # Adjust based on your CPU's core count
-torch.set_num_interop_threads(2)  # Adjust for inter-operation parallelism
+torch.set_num_threads(8)  # Adjust based on your CPU's core count
+torch.set_num_interop_threads(4)  # Adjust for inter-operation parallelism
 model = torch.compile(model, dynamic=False)
 
-image = Image.open("path").convert("RGB")
+image = Image.open("/home/baran/dataset_hub/dataset_converted/Cacti/1.jpg").convert("RGB")
 image.resize((334,334), Image.Resampling.LANCZOS)
 question = "Question: Is this plant healthy? Answer:"
 
