@@ -33,5 +33,10 @@
         "username": "hanz",
         "email": "hanz@mustermann.de",
         "password": "$argon2id$v=19$m=65536,t=3,p=4$mWAKbpUe84qdriRz4R+5Vg$g/X5BRkycjMHkAy/yIeyJNdqEebJYiC9x9bQL83wjYA"
+    },
+    {
+        "username": "Klemens",
+        "email": "klemens@mustermann.de",
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$MjpB+q+Dux8q4geeYnmBLw$XFAdo4Re3hISCIpyl/EbeKiZWzxZBafT2AnP7I1rH14"
     }
 ]
