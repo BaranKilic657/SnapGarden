@@ -44,7 +44,7 @@ else:
     # Adjust threads for CPU performance if desired
     torch.set_num_threads(4)
     torch.set_num_interop_threads(2)
-    # model = torch.compile(model, dynamic=False)  # Optional: for PyTorch 2.x
+    model = torch.compile(model, dynamic=False)  # Optional: for PyTorch 2.x
 
 def check_plant_name(plant_name: str):
     """
@@ -119,6 +119,7 @@ async def analyze_image_or_question(
                 )
             # Attempt to open the uploaded image
             image = Image.open(file.file).convert("RGB")
+            image.resize((334,334), Image.Resampling.LANCZOS)
             logging.debug("Opened user-uploaded image successfully.")
         else:
             # No file uploaded, so load the dummy image
@@ -132,6 +133,7 @@ async def analyze_image_or_question(
             logging.debug("No file uploaded; using dummy image.")
             with open(dummy_path, "rb") as f:
                 image = Image.open(f).convert("RGB")
+                image.resize((334,334), Image.Resampling.LANCZOS)
 
         prompt = f"Question: {question} Answer:"
         logging.debug(f"Prompt sent to the model: {prompt}")
