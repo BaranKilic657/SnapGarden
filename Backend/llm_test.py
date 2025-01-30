@@ -14,7 +14,7 @@ device = "cpu"
 dtype = torch.float32
 model = Blip2ForConditionalGeneration.from_pretrained(model_name, device_map="cpu", torch_dtype=dtype)
 
-torch.set_num_threads(8)  # Adjust based on your CPU's core count
+torch.set_num_threads(8)  # Adjust based on CPU's core count
 torch.set_num_interop_threads(4)  # Adjust for inter-operation parallelism
 model = torch.compile(model, dynamic=False)
 
