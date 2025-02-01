@@ -113,9 +113,7 @@ Once you've completed the installation, you can start using SnapGarden!
 - **Backend**: Built with Python.
 - **Frontend**: Built with JavaScript frameworks.
 
-- **Used Templates**:
-- https://themefisher.com/products/quixlab-bootstrap
-- https://themefisher.com/products/small-apps-bootstrap
+- **Used Templates**: https://themefisher.com/products/quixlab-bootstrap & https://themefisher.com/products/small-apps-bootstrap
 
 ---
 
