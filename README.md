@@ -112,8 +112,10 @@ Once you've completed the installation, you can start using SnapGarden!
 - **AI/ML Models**: Salesforce/blip2-opt-2.7b for plant identification and health analysis.  
 - **Backend**: Built with Python.
 - **Frontend**: Built with JavaScript frameworks.
-        Used Templates: https://themefisher.com/products/quixlab-bootstrap
-                        https://themefisher.com/products/small-apps-bootstrap
+
+- **Used Templates**:
+- https://themefisher.com/products/quixlab-bootstrap
+- https://themefisher.com/products/small-apps-bootstrap
 
 ---
 
