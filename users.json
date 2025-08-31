@@ -60,7 +60,7 @@
         "password": "$argon2id$v=19$m=65536,t=3,p=4$t8xO4DE58or+G8Utmb7GHw$ZHYAgXickAxfNTCiF8m1MR4ImyJz+O9Yqszyz5YIpqQ"
     },
     {
-        "username": "Max",
+        "username": "Maxc",
         "email": "max@mustermann.de",
         "password": "$argon2id$v=19$m=65536,t=3,p=4$fwJYZBUSISWmWUJVKLb7+Q$BgvJWdQej2kOS6mzhJYv0uZLVlYaOcgoUDz/mdBMMXU"
     }
